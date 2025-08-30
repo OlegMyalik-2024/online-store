@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-# Обработка главной страницы index
+# Контроллер главной страницы index
 def index(request):
     context={
         'title': 'HelloMobile - Главная',
@@ -9,6 +9,7 @@ def index(request):
     }
     return render(request, 'main/index.html', context)
 
+#Контроллер страницы about 
 def about(request):
     context={
         'title': 'HelloMobile - О нас',
