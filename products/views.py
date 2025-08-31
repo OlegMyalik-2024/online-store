@@ -4,13 +4,14 @@ from django.shortcuts import get_list_or_404, render
 from products.models import Products
 
 #Контроллер страницы catalog
-def catalog(request, category_slug, page=1):
+def catalog(request, category_slug):
+    page=request.GET.get('page', 1)
     if category_slug=='all':
         products_list=Products.objects.all()
     else:
         products_list=get_list_or_404(Products.objects.filter(category__slug=category_slug))
     paginator=Paginator(products_list, 3)
-    current_page=paginator.page(page)
+    current_page=paginator.page(int(page))
     context = {
         'title': 'HelloMobile - Каталог',
         'products': current_page,
