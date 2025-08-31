@@ -12,6 +12,10 @@ def catalog(request):
     return render(request, 'products/catalog.html', context)
 
 #Контроллер страницы product
-def product(request):
-    return render(request, 'products/product.html')
+def product(request, product_slug):
+    product=Products.objects.get(slug=product_slug)
+    context={
+        'product': product
+    }
+    return render(request, 'products/product.html', context=context)
     
