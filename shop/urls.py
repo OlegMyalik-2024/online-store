@@ -17,8 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from debug_toolbar.toolbar import debug_toolbar_urls
+from shop.settings import DEBUG
+
 urlpatterns = [
     path('admin/', admin.site.urls), #переход в admin панель
     path('', include('main.urls', namespace='main')), #переход в приложение main
     path('catalog/', include('products.urls', namespace='catalog')) #переход в приложение products
 ]
+
+if DEBUG:
+    urlpatterns+= debug_toolbar_urls() # Добавляем URL-ы debug toolbar к существующим

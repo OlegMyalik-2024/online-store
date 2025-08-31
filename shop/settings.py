@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'debug_toolbar',
+    
     'main',
     'products',
 ]
@@ -52,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 ROOT_URLCONF = 'shop.urls'
@@ -122,6 +126,10 @@ USE_TZ = True
 STATIC_URL = 'static/' #Префикс к URL адресу где находятся статические файлы
 STATICFILES_DIRS=[ 
     BASE_DIR/'static' #Глобальный путь для доступа к статическим файлам всего проекта
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
 ]
 
 # Default primary key field type
