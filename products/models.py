@@ -37,6 +37,7 @@ class Products(models.Model):
         db_table='product' # Отображение таблицы в БД
         verbose_name='Продукт' # Отображение таблицы в админке в единственном числе
         verbose_name_plural='Продукты' # Отображение таблицы в админке в множественном числе
+        ordering=("id",)
     
     def __str__(self):
         return f"({self.name}) Количество - {self.quantity}"
