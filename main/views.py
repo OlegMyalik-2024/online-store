@@ -6,11 +6,9 @@ from products.models import Categories
 
 # Контроллер главной страницы index
 def index(request):
-    categories=Categories.objects.all()
     context={
         'title': 'HelloMobile - Главная',
         'content': 'Магазин по продаже мобильных телефонов HelloMobile',
-        'categories': categories
     }
     return render(request, 'main/index.html', context)
 

@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
-from django.conf.global_settings import STATICFILES_DIRS
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -127,6 +126,10 @@ STATIC_URL = 'static/' #Префикс к URL адресу где находят
 STATICFILES_DIRS=[ 
     BASE_DIR/'static' #Глобальный путь для доступа к статическим файлам всего проекта
 ]
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Директория для сбора статических файлов (используется в production)
+
+MEDIA_URL='/media/'  #Префикс к URL адресу где находятся медиа файлы
+MEDIA_ROOT=os.path.join(BASE_DIR, 'media') #Путь для доступа к медиа файлам
 
 INTERNAL_IPS = [
     '127.0.0.1',

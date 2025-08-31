@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.urls import include, path
 
 from debug_toolbar.toolbar import debug_toolbar_urls
-from shop.settings import DEBUG
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls), #переход в admin панель
@@ -26,5 +27,8 @@ urlpatterns = [
     path('catalog/', include('products.urls', namespace='catalog')) #переход в приложение products
 ]
 
-if DEBUG:
+if settings.DEBUG:
     urlpatterns+= debug_toolbar_urls() # Добавляем URL-ы debug toolbar к существующим
+    urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    

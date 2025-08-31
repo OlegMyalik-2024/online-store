@@ -39,4 +39,14 @@ class Products(models.Model):
         verbose_name_plural='Продукты' # Отображение таблицы в админке в множественном числе
     
     def __str__(self):
-        return f'(self.name) Количество - {self.quantity}'
+        return f"({self.name}) Количество - {self.quantity}"
+    
+    #Метод вывода пятизначного id продукта в шаблон
+    def display_id(self):
+        return f"{self.id:05}"
+    
+    # Метод расчета цены со скидкой
+    def sell_price(self):
+        if self.discount:
+            return round(self.price-self.price*self.discount/100, 2)
+        return self.price
