@@ -24,7 +24,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls), #переход в admin панель
     path('', include('main.urls', namespace='main')), #переход в приложение main
-    path('catalog/', include('products.urls', namespace='catalog')) #переход в приложение products
+    path('catalog/', include('products.urls', namespace='catalog')), #переход в приложение products
+    path('user/', include('users.urls', namespace='user')) #переход в приложение users
 ]
 
 if settings.DEBUG:
