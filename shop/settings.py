@@ -147,3 +147,6 @@ INTERNAL_IPS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Переопределение таблицы user_auth в user
+AUTH_USER_MODEL='users.User'

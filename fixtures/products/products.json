@@ -1,7 +1,7 @@
 [
     {
         "model": "products.products",
-        "pk": 5,
+        "pk": 1,
         "fields": {
             "name": "Samsung Galaxy S23",
             "slug": "samsung-galaxy-s23",
@@ -15,7 +15,7 @@
     },
     {
         "model": "products.products",
-        "pk": 6,
+        "pk": 2,
         "fields": {
             "name": "Samsung Galaxy A54",
             "slug": "samsung-galaxy-a54",
@@ -29,7 +29,7 @@
     },
     {
         "model": "products.products",
-        "pk": 7,
+        "pk": 3,
         "fields": {
             "name": "Samsung Galaxy Z Fold 5",
             "slug": "samsung-galaxy-z-fold-5",
@@ -43,7 +43,7 @@
     },
     {
         "model": "products.products",
-        "pk": 8,
+        "pk": 4,
         "fields": {
             "name": "Samsung Galaxy S24",
             "slug": "samsung-galaxy-s24",
@@ -57,7 +57,7 @@
     },
     {
         "model": "products.products",
-        "pk": 9,
+        "pk": 5,
         "fields": {
             "name": "Xiaomi 13",
             "slug": "xiaomi-13",
@@ -71,7 +71,7 @@
     },
     {
         "model": "products.products",
-        "pk": 10,
+        "pk": 6,
         "fields": {
             "name": "Redmi Note 13 Pro",
             "slug": "redmi-note-13-pro",
@@ -85,7 +85,7 @@
     },
     {
         "model": "products.products",
-        "pk": 11,
+        "pk": 7,
         "fields": {
             "name": "Xiaomi 12S Ultra",
             "slug": "xiaomi-12s-ultra",
@@ -99,7 +99,7 @@
     },
     {
         "model": "products.products",
-        "pk": 12,
+        "pk": 8,
         "fields": {
             "name": "Redmi 12",
             "slug": "redmi-12",

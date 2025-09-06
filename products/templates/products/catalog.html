@@ -48,7 +48,7 @@
         </div>
 
 {% if request.GET.q %}
-<h3 class="at-4">Результаты поиска по запросу{{ request.GET.q }} </h3>
+<h3 class="at-4">Результаты поиска по запросу: "{{ request.GET.q }}" </h3>
 {% if not products %}
  <!-- Стиль footer-a для главной страницы -->
 <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
