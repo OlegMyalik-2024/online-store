@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 
-from django.conf.global_settings import PASSWORD_HASHERS
+from django.conf.global_settings import LOGIN_URL, PASSWORD_HASHERS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -150,3 +150,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Переопределение таблицы user_auth в user
 AUTH_USER_MODEL='users.User'
+#Переопределение собственного представления login
+LOGIN_URL='/user/login/'
