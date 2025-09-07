@@ -2,6 +2,10 @@
 {% comment %} Подгрузка статических файлов {% endcomment %}
 {% load static %} 
 
+{% block madal_cart %}
+    {% include "includes/cart_button.html" %}
+{% endblock  %}
+
 {% block content %}
 <!-- Контент на странице -->
     <div class="row">
