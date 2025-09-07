@@ -1,6 +1,7 @@
 # Создание моделей таблиц БД
 from tabnanny import verbose
 from django.db import models
+from django.urls import reverse
 
 
 
@@ -41,6 +42,10 @@ class Products(models.Model):
     
     def __str__(self):
         return f"({self.name}) Количество - {self.quantity}"
+    
+    def get_absolute_url(self):
+        return reverse("catalog:product", kwargs={"product_slug": self.slug})
+    
     
     #Метод вывода пятизначного id продукта в шаблон
     def display_id(self):
