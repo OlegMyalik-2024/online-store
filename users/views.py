@@ -50,7 +50,7 @@ def registration(request):
             user = form.instance
             auth.login(request, user)
             if session_key:
-                Cart.objects.filer(session_key=session_key).update(user=user)
+                Cart.objects.filter(session_key=session_key).update(user=user)
             messages.success(
                 request,
                 f"{user.username}, Вы успешно зарегистрированы и вошли в аккаунт.",
