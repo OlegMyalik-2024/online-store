@@ -27,6 +27,7 @@ urlpatterns = [
     path('catalog/', include('products.urls', namespace='catalog')), #переход в приложение products
     path('user/', include('users.urls', namespace='user')), #переход в приложение users
     path('cart/', include('carts.urls', namespace='cart')), #переход в приложение carts
+    path('orders/', include('orders.urls', namespace='orders')), #переход в приложение orders
 ]
 
 
