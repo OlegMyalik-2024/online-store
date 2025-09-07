@@ -25,8 +25,10 @@ urlpatterns = [
     path('admin/', admin.site.urls), #переход в admin панель
     path('', include('main.urls', namespace='main')), #переход в приложение main
     path('catalog/', include('products.urls', namespace='catalog')), #переход в приложение products
-    path('user/', include('users.urls', namespace='user')) #переход в приложение users
+    path('user/', include('users.urls', namespace='user')), #переход в приложение users
+    path('cart/', include('carts.urls', namespace='cart')), #переход в приложение carts
 ]
+
 
 if settings.DEBUG:
     urlpatterns+= debug_toolbar_urls() # Добавляем URL-ы debug toolbar к существующим
