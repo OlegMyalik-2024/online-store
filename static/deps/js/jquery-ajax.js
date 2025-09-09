@@ -161,6 +161,7 @@ $(document).ready(function () {
                 setTimeout(function () {
                      successMessage.fadeOut(400);
                 }, 7000);
+                
 
                 // Изменяем количество товаров в корзине
                 let productsInCartCount = $("#goods-in-cart-count")
@@ -172,6 +173,9 @@ $(document).ready(function () {
                 // Меняем содержимое корзины
                 let cartItemsContainer = $("#cart-items-container");
                 cartItemsContainer.html(data.cart_items_html);
+
+                // **НОВОЕ: Скрываем кнопку "Оформить заказ" после обновления корзины**
+                cartItemsContainer.find('.btn[href*="create_order"]').hide();
 
             },
             error: function (data) {

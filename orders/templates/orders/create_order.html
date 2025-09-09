@@ -9,7 +9,7 @@
             <h3 class="text-center mb-4">Выбранные товары</h3>
             <div class="container" id="cart-items-container">
                 <!-- Разметка корзины -->
-                 {% user_carts request as carts %}
+                {% user_carts request as carts %}
                 {% include "carts/includes/included_cart.html" %}
                 <!-- Закончилась разметка корзины -->
             </div>
@@ -44,7 +44,7 @@
                                 <label for="id_phone_number" class="form-label">Номер телефона*:</label>
                                 <input type="text" class="form-control" id="id_phone_number" name="phone_number"
                                     value="{% if form.phone_number.value %}{{ form.phone_number.value }}{% endif %}"
-                                    placeholder="В формате: XXX-XXX-XX-XX"
+                                    placeholder="В формате: XXX-(XX)-ХXX-XX-ХХ"
                                     required>
                                 {% if form.phone_number.errors %}
                                     <div class="alert alert-danger alert-dismissible fade show">{{form.phone_number.errors}}</div>
