@@ -2,6 +2,8 @@
 {% load static %} 
 {% comment %} Подгрузка файла с шаблонными тэгами {% endcomment %}
 {% load products_tags %}
+{% load cache %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,7 +69,9 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item  text-white" href="{% url "user:logout" %}">Выйти</a></li>
+                                    <li>
+                                        <a class="dropdown-item  text-white" href="{% url "user:logout" %}">Выйти</a> 
+                                    </li>
                                 </ul>
                             </li>
                         {% endif %}
@@ -93,10 +97,12 @@
                             height="16">
                     </button>
                     <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
+                        {% cache 60 catalog_categories %}
                         {% tag_categories as categories %}
                         {% for category in categories %}
                             <li><a class="dropdown-item text-white" href="{% url "catalog:index" category.slug %}">{{ category.name }}</a></li>
                         {% endfor %}
+                        {% endcache %}
                     </ul>
                 </div>
                 <!-- Значек корзины, вызывает модальное окно -->

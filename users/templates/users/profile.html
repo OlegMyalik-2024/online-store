@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% comment %} Подгрузка статических файлов {% endcomment %}
 {% load static %} 
-
+{% load cache %}
 {% load carts_tags %}
+
 
 {% block content %}
 <!-- Контент на странице -->
@@ -95,6 +96,7 @@
                     </div>
                 </div>
                 <!-- Оформленные заказы -->
+                 {% cache 60 user_orders user_id %}
                 <div class="col-md-12">
                     <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
                         <h3 class="text-center mb-4">Мои заказы</h3>
@@ -139,6 +141,7 @@
                         <!-- Закончилась разметка заказов -->
                     </div>
                 </div>
+                {% endcache %}
             </div>
         </div>
     </div>

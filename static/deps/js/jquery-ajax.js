@@ -174,8 +174,12 @@ $(document).ready(function () {
                 let cartItemsContainer = $("#cart-items-container");
                 cartItemsContainer.html(data.cart_items_html);
 
-                // **НОВОЕ: Скрываем кнопку "Оформить заказ" после обновления корзины**
-                cartItemsContainer.find('.btn[href*="create_order"]').hide();
+                // Скрываем кнопку "Оформить заказ" на странице create_order.html, на всех остальных отображаем
+                if (typeof page !== 'undefined' && page === 'create_order') {
+                    cartItemsContainer.find('.btn[href*="create_order"]').hide();
+                } else {
+                    cartItemsContainer.find('.btn[href*="create_order"]').show();
+                }
 
             },
             error: function (data) {

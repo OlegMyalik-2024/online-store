@@ -1,22 +1,23 @@
-from django.http import HttpResponse
 from django.shortcuts import render
-
-#Импорт моделей таблиц из БД
-from products.models import Categories
+from django.views.generic import TemplateView
 
 # Контроллер главной страницы index
-def index(request):
-    context={
-        'title': 'HelloMobile - Главная',
-        'content': 'Магазин по продаже мобильных телефонов HelloMobile',
-    }
-    return render(request, 'main/index.html', context)
+class IndexView(TemplateView):
+    template_name = 'main/index.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'HelloMobile - Главная'
+        context['content'] = "Интернет-магазин HelloMobile"
+        return context
+    
 #Контроллер страницы about 
-def about(request):
-    context={
-        'title': 'HelloMobile - О нас',
-        'content': 'О нас',
-        'text_on_page': 'Текст о том почему магазин такой классный'
-    }
-    return render(request, 'main/about.html', context)
+class AboutView(TemplateView):
+    template_name = 'main/about.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'HelloMobile - О нас'
+        context['content'] = "О нас"
+        context['text_on_page'] = "Текст о том почему этот магазин такой классный, и какой хороший товар."
+        return context
