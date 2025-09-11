@@ -1,7 +1,11 @@
-from django.apps import AppConfig
+from django.apps import AppConfig  
 
 
+# Класс конфигурации приложения "products"
 class ProductsConfig(AppConfig):
+    # Указываем тип поля по умолчанию для моделей — BigAutoField (64-битный автоинкрементный ID)
     default_auto_field = 'django.db.models.BigAutoField'
+    # Имя приложения — должно совпадать с названием директории приложения
     name = 'products'
-    verbose_name='Товары' # Отображение название приложения в админке
+    # Человекочитаемое имя приложения — отображается в админке Django
+    verbose_name = 'Товары'  

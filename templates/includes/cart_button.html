@@ -1,31 +1,41 @@
+{# Загружаем статические файлы (CSS, JS, изображения) для использования в шаблоне #}
 {% load static %}
+{# Загружаем кастомные теги из приложения carts, например, user_carts #}
 {% load carts_tags %}
 
+{# Получаем корзину пользователя из запроса и сохраняем в переменную carts #}
 {% user_carts request as carts %}
 
 <div>
+    {# Кнопка, открывающая модальное окно корзины #}
     <button type="button" class="btn btn-dark btn-secondary d-flex" id="modalButton"
         aria-expanded="false">
+        {# Иконка корзины (корзина покупок) с отступами по горизонтали #}
         <img class="mx-1" src="{% static "deps/icons/basket2-fill.svg" %}" alt="Catalog Icon" width="24"
             height="24">
-        <span id="goods-in-cart-count">{{carts.total_quantity}}</span>
+        {# Отображение количества товаров в корзине #}
+        <span id="goods-in-cart-count">{{ carts.total_quantity }}</span>
     </button>
 </div>
-<!-- Разметка модального окна корзины -->
+
+{# Разметка модального окна Bootstrap для отображения содержимого корзины #}
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
+        {# Окно с прокруткой, если содержимого много #}
         <div class="modal-content">
             <div class="modal-header">
+                {# Кнопка закрытия модального окна #}
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                {# Заголовок модального окна, выровненный по центру с нижним отступом #}
                 <h3 class="text-center mb-4">Корзина</h3>
                 <div class="container" id="cart-items-container">
-                    <!-- Разметка корзины -->
+                    {# Включаем шаблон с разметкой содержимого корзины #}
                     {% include "carts/includes/included_cart.html" %}
-                    <!-- Закончилась разметка корзины -->
+                    {# Конец разметки корзины #}
                 </div>
             </div>
         </div>

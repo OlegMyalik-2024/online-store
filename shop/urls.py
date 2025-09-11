@@ -1,38 +1,29 @@
-"""
-URL configuration for shop project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import include, path
-
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+# Основной список маршрутов URL проекта
 urlpatterns = [
-    path('admin/', admin.site.urls), #переход в admin панель
-    path('', include('main.urls', namespace='main')), #переход в приложение main
-    path('catalog/', include('products.urls', namespace='catalog')), #переход в приложение products
-    path('user/', include('users.urls', namespace='user')), #переход в приложение users
-    path('cart/', include('carts.urls', namespace='cart')), #переход в приложение carts
-    path('orders/', include('orders.urls', namespace='orders')), #переход в приложение orders
+    path('admin/', admin.site.urls),  # Путь к административной панели Django
+    # Главная страница сайта и маршруты приложения main, namespace позволяет использовать имена URL с префиксом 'main'
+    path('', include('main.urls', namespace='main')),  
+    # Маршруты каталога товаров из приложения products
+    path('catalog/', include('products.urls', namespace='catalog')),  
+    # Маршруты управления пользователями из приложения users
+    path('user/', include('users.urls', namespace='user')),  
+    # Маршруты корзины из приложения carts
+    path('cart/', include('carts.urls', namespace='cart')),  
+     # Маршруты оформления заказов из приложения orders
+    path('orders/', include('orders.urls', namespace='orders')),  
 ]
 
-
+# Дополнительные настройки URL для режима отладки (DEBUG=True)
 if settings.DEBUG:
-    urlpatterns+= debug_toolbar_urls() # Добавляем URL-ы debug toolbar к существующим
-    urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    
+    urlpatterns += debug_toolbar_urls()  # Добавляем URL-ы для панели отладки Django Debug Toolbar
+    # Позволяет серверу разработки отдавать статические файлы (CSS, JS и т.п.)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  
+    # Позволяет серверу разработки отдавать загружаемые медиа-файлы (картинки, документы)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  

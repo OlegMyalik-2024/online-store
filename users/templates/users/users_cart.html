@@ -1,17 +1,26 @@
+{# Наследование базового шаблона base.html #}
 {% extends "base.html" %}
+{# Загрузка статических файлов (CSS, JS и т.д.) #}
 {% load static %}
+{# Загрузка кастомных тегов из приложения carts #}
 {% load carts_tags %}
 
+{# Определение блока content для вставки основного контента страницы #}
 {% block content %}
 <!-- Контент на странице -->
+{# Использование кастомного тега user_carts для получения корзины пользователя и присвоения её переменной carts #}
 {% user_carts request as carts %}
 <div class="row">
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
+            {# Контейнер для отображения корзины с Bootstrap-стилями (фон белый, отступы, тень) #}
+            <div class="bg-white p-4 mb-4 mx-2 rounded custom-shadow">
+                {# Заголовок страницы корзины #}
                 <h3 class="text-center mb-4">Корзина</h3>
+                {# Контейнер для элементов корзины с уникальным ID для возможного обновления через JS #}
                 <div class="container" id="cart-items-container">
                     <!-- Разметка корзины -->
+                    {# Включение подшаблона included_cart.html для отображения содержимого корзины #}
                     {% include "carts/includes/included_cart.html" %}
                     <!-- Закончилась разметка корзины -->
                 </div>
@@ -19,6 +28,5 @@
         </div>
     </div>
 </div>
+{# Закрытие блока content #}
 {% endblock content %}
-
-

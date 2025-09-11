@@ -1,51 +1,88 @@
 {% extends "base.html" %}
+{# Наследуем базовый шаблон base.html, который содержит общую структуру страницы #}
+
 {% load static %}
+{# Загружаем статические файлы (CSS, JS, изображения), чтобы использовать их в шаблоне #}
 
 {% block modal_cart %}
+    {# Переопределяем блок modal_cart из базового шаблона #}
     {% include "includes/cart_button.html" %}
-{% endblock  %}
+    {# Включаем шаблон cart_button.html, который содержит кнопку корзины #}
+{% endblock %}
 
 {% block content %}
+    {# Переопределяем основной блок content для отображения содержимого страницы товара #}
+
     <!-- Контент на странице -->
     <div class="container mt-5">
+        {# Контейнер Bootstrap с отступом сверху для центрирования содержимого #}
+        
         <div class="card mb-4 custom-shadow">
+            {# Карта Bootstrap с кастомной тенью для отображения информации о товаре #}
+            
             <div class="row">
+                {# Ряд Bootstrap для разделения на колонки #}
+                
                 <!-- Миниатюры -->
                 <div class="col-md-4">
+                    {# Колонка шириной 4 из 12 на средних экранах и выше #}
                     <img src="{{ product.image.url }}"
                         class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1">
+                    {# Изображение товара с миниатюрой; клик открывает модальное окно #}
                 </div>
-                <div class="col-md-4 ">
+                
+                <div class="col-md-4">
+                    {# Вторая колонка для дополнительной информации #}
                     <p class="product_id mt-3">id: {{ product.display_id }}</p>
+                    {# Отображаем ID товара с отступом сверху #}
                 </div>
+                
                 <!-- Увеличить изображение в модальном окне -->
                 <div class="modal fade" id="imageModal1" tabindex="-1"
                     aria-labelledby="imageModal1Label" aria-hidden="true">
+                    {# Модальное окно Bootstrap для увеличенного изображения #}
                     <div class="modal-dialog modal-lg">
+                        {# Диалог модального окна большого размера #}
                         <div class="modal-content">
+                            {# Содержимое модального окна #}
                             <div class="modal-header">
+                                {# Заголовок модального окна #}
                                 <h5 class="modal-title" id="imageModal1Label">{{ product.name }}</h5>
+                                {# Название товара в заголовке #}
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Закрыть"></button>
+                                {# Кнопка закрытия модального окна #}
                             </div>
                             <div class="modal-body">
+                                {# Тело модального окна с изображением #}
                                 <img src="{{ product.image.url }}"
                                     class="img-fluid" alt="Изображение 1">
+                                {# Полноразмерное изображение товара #}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <!-- Описание товара -->
             <div class="card-body">
+                {# Тело карты для описания товара #}
                 <p class="card-text">Цена: <strong>{{ product.sell_price }} BYN</strong></p>
+                {# Отображаем цену товара в белорусских рублях #}
                 <h5 class="card-title">{{ product.name }}</h5>
+                {# Название товара в заголовке карты #}
                 <p class="card-text">{{ product.description }}</p>
+                {# Описание товара #}
                 <a href="{% url "cart:cart_add" %}" class="btn btn-dark add-to-cart"
-                    data-product-id={{product.id}}>
+                    data-product-id={{ product.id }}>
+                    {# Ссылка на URL добавления в корзину с данными товара #}
                     {% csrf_token %}
-                    Добавить в корзину</a>
+                    {# Токен CSRF для защиты от подделки запросов #}
+                    Добавить в корзину
+                    {# Текст кнопки #}
+                </a>
             </div>
         </div>
     </div>
 {% endblock %}
+{# Закрываем блок content #}

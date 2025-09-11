@@ -1,82 +1,100 @@
 {% extends "base.html" %}
-{% comment %} Подгрузка статических файлов {% endcomment %}
-{% load static %} 
+{% comment %} Подключаем базовый шаблон, который содержит общую структуру страницы {% endcomment %}
+{% load static %}  {# Загружаем тег static для подключения статических файлов (если понадобится) #}
 
 {% block modal_cart %}
+    {# Вставляем кнопку корзины из отдельного шаблона includes/cart_button.html #}
     {% include "includes/cart_button.html" %}
 {% endblock  %}
 
 {% block content %}
-<!-- Контент на странице -->
+<!-- Основной контент страницы регистрации -->
     <div class="row">
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-9 bg-white p-4 mb-5 mx-2 rounded custom-shadow">
                     <h2 class="text-center mb-4">Регистрация</h2>
+
+                    {# Форма регистрации с POST методом, отправляющая данные на URL с именем user:registration #}
                     <form action="{% url "user:registration" %}" method="post">
-                        {% csrf_token %}
+                        {% csrf_token %}  {# Токен для защиты от CSRF атак #}
+
                         <div class="row">
+                            {# Поле ввода имени пользователя #}
                             <div class="col-md-6 mb-3">
                                 <label for="id_first_name" class="form-label">Имя*</label>
                                 <input type="text" class="form-control" id="id_first_name"
-                                    value="{% if form.first_name.value %}{{form.first_name.value}}{% endif %}"
+                                    value="{% if form.first_name.value %}{{form.first_name.value}}{% endif %}"  {# Восстановление введённого значения при ошибках #}
                                     name="first_name"
                                     placeholder="Введите ваше имя" required>
-                                    {% if form.first_name.errors %}
-                                        <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
-                                    {% endif %}
+                                {# Вывод ошибок валидации для поля first_name, если они есть #}
+                                {% if form.first_name.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
+                                {% endif %}
                             </div>
+
+                            {# Поле ввода фамилии пользователя #}
                             <div class="col-md-6 mb-3">
                                 <label for="id_last_name" class="form-label">Фамилия*</label>
                                 <input type="text" class="form-control" id="id_last_name"
                                     value="{% if form.last_name.value %}{{form.last_name.value}}{% endif %}"
                                     name="last_name"
                                     placeholder="Введите вашу фамилию" required>
-                                    {% if form.last_name.errors %}
-                                        <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
-                                    {% endif %}
+                                {% if form.last_name.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
+                                {% endif %}
                             </div>
+
+                            {# Поле ввода имени пользователя (username) #}
                             <div class="col-md-6 mb-3">
                                 <label for="id_username" class="form-label">Имя пользователя*</label>
                                 <input type="text" class="form-control" id="id_username"
                                     value="{% if form.username.value %}{{form.username.value}}{% endif %}"
                                     name="username"
                                     placeholder="Введите ваше имя пользователя" required>
-                                    {% if form.username.errors %}
-                                        <div class="alert alert-danger alert-dismissible fade show">{{form.username.errors}}</div>
-                                    {% endif %}
+                                {% if form.username.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">{{form.username.errors}}</div>
+                                {% endif %}
                             </div>
+
+                            {# Поле ввода email #}
                             <div class="col-md-6 mb-3">
                                 <label for="id_email" class="form-label">Email*</label>
                                 <input type="email" class="form-control" id="id_email"
                                     value="{% if form.email.value %}{{form.email.value}}{% endif %}"
                                     name="email"
                                     placeholder="Введите ваш email" required>
-                                    {% if form.email.errors %}
-                                        <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
-                                    {% endif %}
+                                {% if form.email.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
+                                {% endif %}
                             </div>
+
+                            {# Поле ввода пароля #}
                             <div class="col-md-6 mb-3">
                                 <label for="id_password1" class="form-label">Пароль*</label>
                                 <input type="password" class="form-control" id="id_password1"
                                     value="{% if form.password1.value %}{{form.password1.value}}{% endif %}"
                                     name="password1"
                                     placeholder="Введите пароль" required>
-                                    {% if form.password1.errors %}
-                                        <div class="alert alert-danger alert-dismissible fade show">{{form.password1.errors}}</div>
-                                    {% endif %}
+                                {% if form.password1.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">{{form.password1.errors}}</div>
+                                {% endif %}
                             </div>
+
+                            {# Поле подтверждения пароля #}
                             <div class="col-md-6 mb-3">
                                 <label for="id_password2" class="form-label">Подтверждение пароля*</label>
                                 <input type="password" class="form-control" id="id_password2"
                                     value="{% if form.password2.value %}{{form.password2.value}}{% endif %}"
                                     name="password2"
                                     placeholder="Подтвердите пароль" required>
-                                    {% if form.password2.errors %}
-                                        <div class="alert alert-danger alert-dismissible fade show">{{form.password2.errors}}</div>
-                                    {% endif %}
+                                {% if form.password2.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">{{form.password2.errors}}</div>
+                                {% endif %}
                             </div>
                         </div>
+
+                        {# Кнопка отправки формы #}
                         <button type="submit"
                             class="btn btn-dark btn-block">Зарегистрироваться</button>
                     </form>

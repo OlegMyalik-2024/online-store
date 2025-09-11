@@ -1,76 +1,67 @@
-// Когда html документ готов (прорисован)
+// Когда HTML-документ полностью загружен и DOM готов к работе
 $(document).ready(function () {
-    // берем в переменную элемент разметки с id jq-notification для оповещений от ajax
+    // Сохраняем в переменную элемент для отображения уведомлений от AJAX-запросов
     var successMessage = $("#jq-notification");
 
-    // Ловим собыитие клика по кнопке добавить в корзину
+    // Обработчик клика по кнопке "Добавить в корзину"
     $(document).on("click", ".add-to-cart", function (e) {
-        // Блокируем его базовое действие
-        e.preventDefault();
+        e.preventDefault(); // Отменяем стандартное действие ссылки
 
-        // Берем элемент счетчика в значке корзины и берем оттуда значение
+        // Получаем текущий счетчик товаров в корзине и преобразуем в число
         var goodsInCartCount = $("#goods-in-cart-count");
         var cartCount = parseInt(goodsInCartCount.text() || 0);
 
-        // Получаем id товара из атрибута data-product-id
+        // Получаем id товара из data-атрибута кнопки
         var product_id = $(this).data("product-id");
 
-        // Из атрибута href берем ссылку на контроллер django
+        // Получаем URL для добавления товара в корзину из атрибута href
         var add_to_cart_url = $(this).attr("href");
 
-        // делаем post запрос через ajax не перезагружая страницу
+        // Отправляем POST-запрос через AJAX для добавления товара в корзину
         $.ajax({
             type: "POST",
             url: add_to_cart_url,
             data: {
                 product_id: product_id,
-                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),  // CSRF токен для безопасности
             },
             success: function (data) {
-                // Сообщение
+                // Показываем сообщение об успешном добавлении товара
                 successMessage.html(data.message);
                 successMessage.fadeIn(400);
-                // Через 7сек убираем сообщение
+                // Через 7 секунд скрываем сообщение
                 setTimeout(function () {
                     successMessage.fadeOut(400);
                 }, 7000);
 
-                // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
+                // Увеличиваем счетчик товаров в корзине на 1
                 cartCount++;
                 goodsInCartCount.text(cartCount);
 
-                // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
+                // Обновляем содержимое корзины на странице новым HTML от сервера
                 var cartItemsContainer = $("#cart-items-container");
                 cartItemsContainer.html(data.cart_items_html);
-
             },
-
-            error: function (data) {
+            error: function () {
                 console.log("Ошибка при добавлении товара в корзину");
             },
         });
     });
 
-
-
-
-    // Ловим собыитие клика по кнопке удалить товар из корзины
+    // Обработчик клика по кнопке "Удалить товар из корзины"
     $(document).on("click", ".remove-from-cart", function (e) {
-        // Блокируем его базовое действие
-        e.preventDefault();
+        e.preventDefault(); // Отменяем стандартное действие ссылки
 
-        // Берем элемент счетчика в значке корзины и берем оттуда значение
         var goodsInCartCount = $("#goods-in-cart-count");
         var cartCount = parseInt(goodsInCartCount.text() || 0);
 
-        // Получаем id корзины из атрибута data-cart-id
+        // Получаем id элемента корзины из data-атрибута
         var cart_id = $(this).data("cart-id");
-        // Из атрибута href берем ссылку на контроллер django
+        // Получаем URL для удаления товара из корзины
         var remove_from_cart = $(this).attr("href");
 
-        // делаем post запрос через ajax не перезагружая страницу
+        // Отправляем POST-запрос на удаление товара
         $.ajax({
-
             type: "POST",
             url: remove_from_cart,
             data: {
@@ -78,71 +69,57 @@ $(document).ready(function () {
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
             success: function (data) {
-                // Сообщение
+                // Показываем сообщение об успешном удалении
                 successMessage.html(data.message);
                 successMessage.fadeIn(400);
-                // Через 7сек убираем сообщение
                 setTimeout(function () {
                     successMessage.fadeOut(400);
                 }, 7000);
 
-                // Уменьшаем количество товаров в корзине (отрисовка)
+                // Уменьшаем счетчик товаров на количество удаленных позиций
                 cartCount -= data.quantity_deleted;
                 goodsInCartCount.text(cartCount);
 
-                // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
+                // Обновляем содержимое корзины новым HTML
                 var cartItemsContainer = $("#cart-items-container");
                 cartItemsContainer.html(data.cart_items_html);
-
             },
-
-            error: function (data) {
-                console.log("Ошибка при добавлении товара в корзину");
+            error: function () {
+                console.log("Ошибка при удалении товара из корзины");
             },
         });
     });
 
-
-
-
-    // Теперь + - количества товара 
-    // Обработчик события для уменьшения значения
+    // Обработчик клика по кнопке уменьшения количества товара
     $(document).on("click", ".decrement", function () {
-        // Берем ссылку на контроллер django из атрибута data-cart-change-url
+        // Получаем URL для изменения количества товара
         var url = $(this).data("cart-change-url");
-        // Берем id корзины из атрибута data-cart-id
+        // Получаем id корзины
         var cartID = $(this).data("cart-id");
-        // Ищем ближайшеий input с количеством 
+        // Ищем input с количеством рядом с кнопкой
         var $input = $(this).closest('.input-group').find('.number');
-        // Берем значение количества товара
         var currentValue = parseInt($input.val());
-        // Если количества больше одного, то только тогда делаем -1
+
+        // Если количество больше 1, уменьшаем на 1 и обновляем корзину
         if (currentValue > 1) {
             $input.val(currentValue - 1);
-            // Запускаем функцию определенную ниже
-            // с аргументами (id карты, новое количество, количество уменьшилось или прибавилось, url)
             updateCart(cartID, currentValue - 1, -1, url);
         }
     });
 
-    // Обработчик события для увеличения значения
+    // Обработчик клика по кнопке увеличения количества товара
     $(document).on("click", ".increment", function () {
-        // Берем ссылку на контроллер django из атрибута data-cart-change-url
         var url = $(this).data("cart-change-url");
-        // Берем id корзины из атрибута data-cart-id
         var cartID = $(this).data("cart-id");
-        // Ищем ближайшеий input с количеством 
         var $input = $(this).closest('.input-group').find('.number');
-        // Берем значение количества товара
         var currentValue = parseInt($input.val());
 
+        // Увеличиваем количество на 1 и обновляем корзину
         $input.val(currentValue + 1);
-
-        // Запускаем функцию определенную ниже
-        // с аргументами (id карты, новое количество, количество уменьшилось или прибавилось, url)
         updateCart(cartID, currentValue + 1, 1, url);
     });
 
+    // Функция для отправки AJAX-запроса на сервер для обновления количества товара в корзине
     function updateCart(cartID, quantity, change, url) {
         $.ajax({
             type: "POST",
@@ -152,107 +129,116 @@ $(document).ready(function () {
                 quantity: quantity,
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
-
             success: function (data) {
-                // Сообщение
+                // Отображаем сообщение от сервера
                 successMessage.html(data.message);
                 successMessage.fadeIn(400);
-                // Через 7сек убираем сообщение
                 setTimeout(function () {
                     successMessage.fadeOut(400);
                 }, 7000);
 
-                // Изменяем количество товаров в корзине
+                // Обновляем счетчик товаров в корзине с учетом изменения
                 var goodsInCartCount = $("#goods-in-cart-count");
                 var cartCount = parseInt(goodsInCartCount.text() || 0);
                 cartCount += change;
                 goodsInCartCount.text(cartCount);
 
-                // Меняем содержимое корзины
+                // Обновляем содержимое корзины
                 var cartItemsContainer = $("#cart-items-container");
                 cartItemsContainer.html(data.cart_items_html);
-
             },
-            error: function (data) {
-                console.log("Ошибка при добавлении товара в корзину");
+            error: function () {
+                console.log("Ошибка при обновлении количества товара в корзине");
             },
         });
     }
 
-    // Берем из разметки элемент по id - оповещения от django
+    // Автоматическое скрытие уведомления от Django через 7 секунд, если оно есть
     var notification = $('#notification');
-    // И через 7 сек. убираем
     if (notification.length > 0) {
         setTimeout(function () {
             notification.alert('close');
         }, 7000);
     }
 
-    // При клике по значку корзины открываем всплывающее(модальное) окно
+    // При клике на иконку корзины открываем модальное окно с корзиной
     $('#modalButton').click(function () {
-        $('#exampleModal').appendTo('body');
-
-        $('#exampleModal').modal('show');
+        $('#exampleModal').appendTo('body');  // Перемещаем модальное окно в body (чтобы работало корректно)
+        $('#exampleModal').modal('show');    // Показываем модальное окно
     });
 
-    // Собыите клик по кнопке закрыть окна корзины
+    // Закрытие модального окна корзины по клику на кнопку закрытия
     $('#exampleModal .btn-close').click(function () {
         $('#exampleModal').modal('hide');
     });
 
-    // Обработчик события радиокнопки выбора способа доставки
+    // Обработчик изменения выбора способа доставки (радиокнопки)
     $("input[name='requires_delivery']").change(function () {
         var selectedValue = $(this).val();
-        // Скрываем или отображаем input ввода адреса доставки
+        // Если выбран вариант "требуется доставка" (значение "1"), показываем поле для ввода адреса
         if (selectedValue === "1") {
             $("#deliveryAddressField").show();
         } else {
+            // Иначе скрываем поле адреса доставки
             $("#deliveryAddressField").hide();
         }
     });
 
-    // Формат ввода телефона в формате (xx)-xxx-xx-xx
-document.getElementById('id_phone_number').addEventListener('input', function (e) {
-    var digits = e.target.value.replace(/\D/g, ''); // убрать все нецифры
-    var result = '';
+    // Форматирование поля ввода номера телефона в режиме реального времени
+    document.getElementById('id_phone_number').addEventListener('input', function (e) {
+        // Убираем все символы кроме цифр
+        var digits = e.target.value.replace(/\D/g, '');
 
-    if (digits.length > 0) {
-        if (digits.length <= 2) {
-            // пока набрали 1-2 цифры: показываем в скобках
-            result = '(' + digits;
-        } else if (digits.length <= 5) {
-            // две цифры в скобках, далее -3 цифры
-            result = '(' + digits.substring(0, 2) + ')-' + digits.substring(2);
-        } else if (digits.length <= 7) {
-            // далее добавляем две цифры после второго дефиса
-            result = '(' + digits.substring(0, 2) + ')-' + digits.substring(2, 5) + '-' + digits.substring(5);
+        // Ограничиваем длину до 12 цифр (код страны + номер)
+        if (digits.length > 12) digits = digits.substring(0, 12);
+
+        var formatted = '';
+
+        // Форматируем номер, если он начинается с кода страны 375 (Беларусь)
+        if (digits.startsWith('375')) {
+            var rest = digits.substring(3);
+            formatted = '375';
+
+            if (rest.length > 0) {
+                formatted += '-(' + rest.substring(0, Math.min(2, rest.length));
+            }
+            if (rest.length >= 2) {
+                formatted += ')';
+            }
+            if (rest.length > 2) {
+                formatted += '-' + rest.substring(2, Math.min(5, rest.length));
+            }
+            if (rest.length > 5) {
+                formatted += '-' + rest.substring(5, Math.min(7, rest.length));
+            }
+            if (rest.length > 7) {
+                formatted += '-' + rest.substring(7, Math.min(9, rest.length));
+            }
         } else {
-            // полный формат: (xx)-xxx-xx-xx
-            result = '(' + digits.substring(0, 2) + ')-' +
-                     digits.substring(2, 5) + '-' +
-                     digits.substring(5, 7) + '-' +
-                     digits.substring(7, 9);
+            // Если номер не начинается с 375 — выводим только цифры без форматирования
+            formatted = digits;
         }
-    }
 
-    e.target.value = result;
-});
+        // Обновляем поле ввода отформатированным номером
+        e.target.value = formatted;
+    });
 
-// Проверяем на стороне клиента корректность номера в формате (xx)-xxx-xx-xx
-$('#create_order_form').on('submit', function (event) {
-    var phoneNumber = $('#id_phone_number').val();
-    var regex = /^\(\d{2}\)-\d{3}-\d{2}-\d{2}$/;
+    // Валидация формы оформления заказа при отправке
+    $('#create_order_form').on('submit', function (event) {
+        var phoneNumber = $('#id_phone_number').val();
+        // Регулярное выражение для проверки формата: 375-(xx)-xxx-xx-xx
+        var regex = /^375-\(\d{2}\)-\d{3}-\d{2}-\d{2}$/;
 
-    if (!regex.test(phoneNumber)) {
-        $('#phone_number_error').show();
-        event.preventDefault();
-    } else {
-        $('#phone_number_error').hide();
-
-        // Очистка номера телефона от скобок и тире перед отправкой формы
-        var cleanedPhoneNumber = phoneNumber.replace(/[()\-\s]/g, '');
-        $('#id_phone_number').val(cleanedPhoneNumber);
-    }
-});
-
+        if (!regex.test(phoneNumber)) {
+            // Если формат не соответствует, показываем ошибку и отменяем отправку формы
+            $('#phone_number_error').show();
+            event.preventDefault();
+        } else {
+            // Если формат корректный, скрываем ошибку
+            $('#phone_number_error').hide();
+            // Очищаем номер от скобок, дефисов и пробелов перед отправкой на сервер
+            var cleanedPhoneNumber = phoneNumber.replace(/[()\-\s]/g, '');
+            $('#id_phone_number').val(cleanedPhoneNumber);
+        }
+    });
 });

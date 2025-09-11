@@ -1,25 +1,28 @@
-{% extends "base.html" %}
+{% extends "base.html" %}  {# Наследование от базового шаблона base.html #}
 {% comment %} Подгрузка статических файлов {% endcomment %}
-{% load static %} 
+{% load static %}  {# Загрузка тега static для корректной работы со статическими файлами в Django #}
 
-{% block css %}
-    <!-- Стиль footer-a для главной страницы -->
-    <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+{% block css %}  {# Блок для подключения CSS-стилей #}
+    <!-- Подключение стилей для футера на главной странице -->
+    <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">  {# Ссылка на статический CSS-файл #}
 {% endblock css %}
 
-{% block modal_cart %}
-    {% include "includes/cart_button.html" %}
+{% block modal_cart %}  {# Блок для модального окна корзины #}
+    {# Включение шаблона с кнопкой корзины (например, для показа модального окна с товарами) #}
+    {% include "includes/cart_button.html" %}  {# Подключение внешнего шаблона #}
 {% endblock  %}
 
-{% block content %}
-    <!-- Контент на странице -->
-    <h1 id="title" class="mt-5 pt-5"><strong>{{ content }}</strong></h1>
+{% block content %}  {# Основной блок контента страницы #}
+    <!-- Контейнер для заголовка страницы -->
+    {# Вывод заголовка страницы, передаваемого из контекста (например, из view), с отступами сверху #}
+    <h1 id="title" class="mt-5 pt-5"><strong>{{ content }}</strong></h1>  {# H1-заголовок с жирным шрифтом #}
 {% endblock %}
 
-{% block footer%}
-{% comment %} Футер {% endcomment %}
-    <footer class="py-4 bg-dark">
-        <div class="container">
+{% block footer %}  {# Блок для футера страницы #}
+{% comment %} Определение содержимого футера {% endcomment %}
+    <footer class="py-4 bg-dark">  {# Футер с темным фоном и вертикальными отступами #}
+        <div class="container">  {# Контейнер Bootstrap для центрирования #}
+            {# Текст копирайта, центрированный и белого цвета #}
             <p class="m-0 text-center text-white">Copyright &copy; HelloMobile 2025</p>
         </div>
     </footer>

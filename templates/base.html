@@ -1,133 +1,204 @@
+{# Базовый шаблон base.html для всего сайта, предоставляющий общую структуру HTML, навигацию и блоки для переопределения #}
+
 {% comment %} Подгрузка статических файлов {% endcomment %}
 {% load static %} 
+{# Загружаем статические файлы (CSS, JS, изображения) для использования в шаблоне #}
+
 {% comment %} Подгрузка файла с шаблонными тэгами {% endcomment %}
 {% load products_tags %}
+{# Загружаем кастомные теги из приложения products (например, tag_categories для категорий) #}
+
 {% load cache %}
+{# Загружаем теги кэширования для оптимизации производительности #}
 
 <!DOCTYPE html>
 <html lang="en">
+{# Начало HTML-документа с указанием языка #}
 
 <head>
     <meta charset="UTF-8">
+    {# Кодировка символов UTF-8 #}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {# Совместимость с Internet Explorer #}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# Адаптивность для мобильных устройств #}
+    
+    {# Подключение Bootstrap CSS #}
     <link rel="stylesheet" href="{% static "deps/css/bootstrap/bootstrap.min.css" %}">
+    {# Подключение кастомных стилей #}
     <link rel="stylesheet" href="{% static "deps/css/my_css.css" %}">
+    
     <!-- Стиль footer-a для главной страницы -->
-    {% block  css %}{% endblock  %}
+    {% block css %}{% endblock %}
+    {# Блок для дополнительных CSS, переопределяемых в дочерних шаблонах #}
+    
     <!-- Favicons for different platforms -->
+    {# Фавиконки для различных платформ и устройств #}
     <link rel="apple-touch-icon" sizes="180x180" href="{% static "deps/favicon/apple-touch-icon.png" %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static "deps/favicon/favicon-32x32.png" %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static "deps/favicon/favicon-16x16.png" %}">
     <link rel="manifest" href="{% static "deps/favicon/site.webmanifest" %}">
+    
     <title>{{ title }}</title>
+    {# Заголовок страницы, передаваемый через контекст #}
 </head>
 
 <body>
     <header>
+        {# Шапка сайта #}
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+            {# Навигационная панель Bootstrap с темной темой #}
             <div class="container">
+                {# Контейнер для центрирования содержимого #}
                 <a class="navbar-brand" href="{% url "main:index" %}">HelloMobile</a>
+                {# Логотип/название сайта с ссылкой на главную #}
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
+                    {# Кнопка для мобильного меню (бургер) #}
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    {# Сворачиваемое меню навигации #}
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown ">
+                        {# Список пунктов меню #}
+                        <li class="nav-item dropdown">
+                            {# Выпадающее меню "Информация" #}
                             <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Информация
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item  text-white" href="{% url "main:delivery_and_payment" %}">Доставка и оплата</a></li>
-                                <li><a class="dropdown-item  text-white" href="{% url "main:contacts" %}">Контактная информация</a></li>
-                                <li><a class="dropdown-item  text-white" href="{% url "main:about" %}">Про нас</a></li>
+                                {# Подменю с ссылками на информационные страницы #}
+                                <li><a class="dropdown-item text-white" href="{% url "main:delivery_and_payment" %}">Доставка и оплата</a></li>
+                                <li><a class="dropdown-item text-white" href="{% url "main:contacts" %}">Контактная информация</a></li>
+                                <li><a class="dropdown-item text-white" href="{% url "main:about" %}">Про нас</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-white" href="{% url "user:users_cart" %}">Корзина</a>
+                            {# Пункт меню "Корзина" #}
+                            <a class="nav-link text-white" href="{% url "user:users_cart" %}">Корзина</a>
                         </li>
+                        
                         {% if not user.is_authenticated %}
+                            {# Условный блок: если пользователь не аутентифицирован #}
                             <li class="nav-item">
-                                <a class="nav-link  text-white" href="{% url "user:login" %}">Войти</a>
+                                {# Пункт "Войти" #}
+                                <a class="nav-link text-white" href="{% url "user:login" %}">Войти</a>
                             </li>
                         {% else %}
-                            <li class="nav-item dropdown ">
+                            {# Если пользователь аутентифицирован #}
+                            <li class="nav-item dropdown">
+                                {# Выпадающее меню "Мой профиль" #}
                                 <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Мой профиль
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item  text-white" href="{% url "user:users_cart" %}">Корзина</a></li>
-                                    <li><a class="dropdown-item  text-white" href="{% url "user:profile" %}">Личный кабинет</a>
-                                    </li>
+                                    {# Подменю профиля #}
+                                    <li><a class="dropdown-item text-white" href="{% url "user:users_cart" %}">Корзина</a></li>
+                                    <li><a class="dropdown-item text-white" href="{% url "user:profile" %}">Личный кабинет</a></li>
                                     {% if user.is_admin or user.is_staff %}
-                                        <li><a class="dropdown-item  text-white" href="{% url "admin:index" %}">Админ панель</a></li>
+                                        {# Условно: если пользователь админ или персонал #}
+                                        <li><a class="dropdown-item text-white" href="{% url "admin:index" %}">Админ панель</a></li>
                                     {% endif %}
                                     <li>
                                         <hr class="dropdown-divider">
+                                        {# Разделитель в меню #}
                                     </li>
                                     <li>
-                                        <a class="dropdown-item  text-white" href="{% url "user:logout" %}">Выйти</a> 
+                                        <a class="dropdown-item text-white" href="{% url "user:logout" %}">Выйти</a> 
                                     </li>
                                 </ul>
                             </li>
                         {% endif %}
                     </ul>
+                    
                     <form class="d-flex" role="search" action="{% url "catalog:search" %}" method="get">
+                        {# Форма поиска с отправкой на страницу поиска #}
                         <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+                        {# Поле ввода для поискового запроса #}
                         <button class="btn btn-outline-success text-white" type="submit">Поиск</button>
+                        {# Кнопка отправки формы #}
                     </form>
                 </div>
             </div>
         </nav>
     </header>
+    
     <section>
+        {# Основная секция страницы #}
         <div class="container">
+            {# Контейнер для содержимого #}
             <!-- Каталог и корзина с фиксированным расположением на странице -->
             <div class="row mt-1 position-fixed z-3">
+                {# Фиксированный ряд для каталога и корзины #}
                 <!-- Каталог -->
                 <div class="dropdown mb-2">
+                    {# Выпадающее меню каталога #}
                     <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Каталог
                         <img class="mx-1" src="{% static "deps/icons/grid-fill.svg" %}" alt="Catalog Icon" width="16"
                             height="16">
+                        {# Кнопка с иконкой для открытия меню #}
                     </button>
                     <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
+                        {# Меню с категориями, кэшированное на 60 секунд #}
                         {% cache 60 catalog_categories %}
+                        {# Кэшируем блок на 60 секунд для улучшения производительности #}
                         {% tag_categories as categories %}
+                        {# Получаем категории через кастомный тег #}
                         {% for category in categories %}
+                            {# Цикл по категориям #}
                             <li><a class="dropdown-item text-white" href="{% url "catalog:index" category.slug %}">{{ category.name }}</a></li>
+                            {# Ссылка на страницу категории #}
                         {% endfor %}
                         {% endcache %}
+                        {# Конец кэшированного блока #}
                     </ul>
                 </div>
                 <!-- Значек корзины, вызывает модальное окно -->
-                {% block modal_cart %}{% endblock  %}
+                {% block modal_cart %}{% endblock %}
+                {# Блок для модального окна корзины, переопределяемый в дочерних шаблонах #}
                 <!-- Закончилась разметка модального окна -->
             </div>
         </div>
+        
         <!-- Контент -->
         <div class="container">
+            {# Контейнер для основного контента #}
             <div class="row mt-1">
+                {# Ряд с отступом сверху #}
                 <div class="col-lg-2">
                     <!-- Пустой блок на Ваше усмотрение -->
+                    {# Левый сайдбар (пустой, для будущего использования) #}
                 </div>
                 <div class="col-lg-10">
                     <!-- Контент на странице -->
-                     {% include "includes/notifications.html" %}
-                   {% block content %}{% endblock %}
+                    {% include "includes/notifications.html" %}
+                    {# Включаем шаблон уведомлений (сообщения об успехе/ошибках) #}
+                    {% block content %}{% endblock %}
+                    {# Основной блок контента, переопределяемый в дочерних шаблонах #}
                 </div>
             </div>
         </div>
     </section>
+    
     {% block footer %}{% endblock %}
+    {# Блок для футера, переопределяемый в дочерних шаблонах #}
+    
+    {# Подключение JavaScript библиотек #}
     <script src="{% static "deps/js/jquery/jquery-3.7.0.min.js" %}"></script>
+    {# jQuery для работы с DOM #}
     <script src="{% static "deps/js/jquery-ajax.js" %}"></script>
+    {# Кастомный скрипт для AJAX-запросов #}
     <script src="{% static "deps/js/bootstrap/bootstrap.bundle.min.js" %}"></script>
+    {# Bootstrap JS для интерактивности #}
 </body>
 
 </html>
+
+Найти еще

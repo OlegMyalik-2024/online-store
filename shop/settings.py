@@ -14,34 +14,41 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Корневая директория проекта, используется для построения путей к файлам и папкам
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# Секретный ключ проекта, используемый для криптографических операций (подписи cookies, токенов и т.п.)
+# В продакшене его нужно хранить в секрете и не выкладывать в публичный доступ
 SECRET_KEY = 'django-insecure-j45gvtheyc)(ds3!hfbz6n!!9dc4qm^fg*p3+7og&^uszk)uhs'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Включение режима отладки — показывает подробные ошибки и логи
+# В продакшене всегда ставить False
 DEBUG = True
 
+# Список доменных имён или IP, с которых разрешены запросы к серверу
+# В режиме DEBUG можно оставить пустым, в продакшене указывать реальные хосты
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
+# Стандартные встроенные приложения Django:
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.postgres',
+    'django.contrib.admin',          # Административная панель
+    'django.contrib.auth',           # Аутентификация и авторизация
+    'django.contrib.contenttypes',   # Работа с типами моделей
+    'django.contrib.sessions',       # Работа с сессиями
+    'django.contrib.messages',       # Система сообщений
+    'django.contrib.staticfiles',    # Управление статическими файлами
+    'django.contrib.postgres',       # Расширения для PostgreSQL (например, полнотекстовый поиск)
     
-    'debug_toolbar',
+    # Сторонние приложения:
+    'debug_toolbar',                 # Панель отладки Django Debug Toolbar
     
+    # Пользовательские приложения проекта:
     'main',
     'products',
     'users',
@@ -50,121 +57,135 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',            # Защита безопасности (например, HSTS)
+    'django.contrib.sessions.middleware.SessionMiddleware',     # Поддержка сессий
+    'django.middleware.common.CommonMiddleware',                # Общие функции (редиректы, заголовки и т.п.)
+    'django.middleware.csrf.CsrfViewMiddleware',                # Защита от CSRF-атак
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Аутентификация пользователя
+    'django.contrib.messages.middleware.MessageMiddleware',     # Система сообщений
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',   # Защита от кликаджеков
     
-    'debug_toolbar.middleware.DebugToolbarMiddleware'
+    'debug_toolbar.middleware.DebugToolbarMiddleware'           # Middleware для панели отладки
 ]
 
+# Главный файл маршрутизации URL проекта
 ROOT_URLCONF = 'shop.urls'
 
+# Шаблоны
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',  # Движок шаблонов Django
+        'DIRS': [BASE_DIR / 'templates'],  # Папка с пользовательскими шаблонами
+        'APP_DIRS': True,                  # Автоматический поиск шаблонов в папках приложений
         'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+            'context_processors': [       # Контекстные процессоры — добавляют переменные в шаблоны
+                'django.template.context_processors.request',  # Добавляет объект request
+                'django.contrib.auth.context_processors.auth', # Добавляет данные пользователя
+                'django.contrib.messages.context_processors.messages',  # Добавляет сообщения
             ],
         },
     },
 ]
 
+# Точка входа для WSGI-сервера (используется при деплое)
 WSGI_APPLICATION = 'shop.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+# База данных
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'HelloMobile',
-        'USER': 'HelloMobile',
-        'PASSWORD': 'Hgggght97107',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql',  # Используем PostgreSQL как базу данных
+        'NAME': 'HelloMobile',                      # Имя базы данных
+        'USER': 'HelloMobile',                      # Пользователь базы данных
+        'PASSWORD': 'Hgggght97107',                 # Пароль пользователя
+        'HOST': 'localhost',                        # Хост базы данных (локальный сервер)
+        'PORT': '5432',                            # Порт базы данных PostgreSQL
     }
 }
 
+# Кэширование
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
-        "LOCATION": BASE_DIR / "cache",
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",  # Кэширование в файловой системе
+        "LOCATION": BASE_DIR / "cache",  # Папка для хранения файлов кэша
     }
 }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
+# Валидация паролей
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        # Проверка, что пароль не слишком похож на атрибуты пользователя
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        # Проверка минимальной длины пароля (по умолчанию 8 символов)
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        # Проверка, что пароль не является слишком распространённым
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        # Проверка, что пароль не состоит только из цифр
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
-
-LANGUAGE_CODE = 'ru' # Язык Django
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_TZ = True
-
+LANGUAGE_CODE = 'ru'  # Язык по умолчанию — русский
+TIME_ZONE = 'UTC'  # Часовой пояс (UTC — всемирное координированное время)
+USE_I18N = True  # Включить поддержку интернационализации (переводы)
+USE_TZ = True  # Включить поддержку временных зон
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
+# Префикс URL для доступа к статическим файлам (например, /static/css/style.css)
+STATIC_URL = 'static/'  
 
-STATIC_URL = 'static/' #Префикс к URL адресу где находятся статические файлы
-STATICFILES_DIRS=[ 
-    BASE_DIR/'static' #Глобальный путь для доступа к статическим файлам всего проекта
+# Папка с глобальными статическими файлами проекта (не собранными)
+STATICFILES_DIRS = [ 
+    BASE_DIR / 'static'  
 ]
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Директория для сбора статических файлов (используется в production)
 
-MEDIA_URL='/media/'  #Префикс к URL адресу где находятся медиа файлы
-MEDIA_ROOT=os.path.join(BASE_DIR, 'media') #Путь для доступа к медиа файлам
+# Папка, куда собираются все статические файлы при выполнении команды collectstatic (для продакшена)
+STATIC_ROOT = BASE_DIR / 'staticfiles'  
 
+# Префикс URL для доступа к медиафайлам (загружаемым пользователями)
+MEDIA_URL = '/media/'  
+
+# Путь к папке, где хранятся загружаемые медиафайлы
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  
+
+# IP-адреса, с которых разрешено показывать панель отладки (обычно локальный хост)
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
+# Тип поля по умолчанию для первичных ключей моделей (большое целое число)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#Переопределение таблицы user_auth в user
-AUTH_USER_MODEL='users.User'
-#Переопределение собственного представления login
-LOGIN_URL='/user/login/'
-LOGIN_REDIRECT_URL='/'
+# Переопределение стандартной модели пользователя Django на свою
+AUTH_USER_MODEL = 'users.User' # Указываем, что пользовательская модель User находится в приложении users
 
+# Переопределение URL для страницы входа
+# URL, на который перенаправляются неавторизованные пользователи при попытке доступа к защищённым страницам
+LOGIN_URL = '/user/login/'
+
+# URL, на который перенаправляется пользователь после успешного входа
+LOGIN_REDIRECT_URL = '/'
+
+# Настройка отправки почты
+# В режиме разработки письма выводятся в консоль (не отправляются реально)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# Для продакшена (замените на реальные данные)
+# Настройки для реальной отправки почты (SMTP) — раскомментировать и заполнить для продакшена
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'  # Или ваш SMTP-сервер
+# EMAIL_HOST = 'smtp.gmail.com'  # SMTP сервер (пример — Gmail)
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = 'your-email@gmail.com'

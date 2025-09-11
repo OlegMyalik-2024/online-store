@@ -1,41 +1,59 @@
+{# Загружаем модуль для работы со статическими файлами #}
 {% load static %}
 
+{# Основная карточка для отображения товаров в корзине #}
 <div class="card mb-3 text-bg-light shadow-lg">
+    {# Цикл по товарам в корзине #}
     {% for cart in carts %}
+        {# Заголовок карточки с названием товара #}
         <div class="card-header">
             <h5 class="card-title">{{ cart.product.name }}</h5>
         </div>
+        {# Список элементов для каждого товара #}
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <div class="row text-center">
+                    {# Колонка с кнопками изменения количества #}
                     <div class="col p-0">
                         <div class="input-group">
                             <span class="input-group-btn">
+                                {# Кнопка уменьшения количества товара #}
                                 <button type="button" class="btn btn-dark btn-sm decrement"
                                     data-cart-id="{{ cart.id }}"
                                     data-cart-change-url="{% url "cart:cart_change" %}">
+                                    {# Токен для защиты от CSRF #}
                                     {% csrf_token %}
-                                    -</button>
+                                    -
+                                </button>
                             </span>
+                            {# Поле для отображения текущего количества (только чтение) #}
                             <input type="text" class="form-control number" value="{{ cart.quantity }}"
                                 readonly>
                             <span class="input-group-btn">
+                                {# Кнопка увеличения количества товара #}
                                 <button type="button" class="btn btn-dark btn-sm increment"
                                     data-cart-id="{{ cart.id }}"
                                     data-cart-change-url="{% url "cart:cart_change" %}">
+                                    {# Токен для защиты от CSRF #}
                                     {% csrf_token %}
-                                    +</button>
+                                    +
+                                </button>
                             </span>
                         </div>
                     </div>
+                    {# Колонка с ценой за единицу #}
                     <div class="col p-0">
                         <p>x {{ cart.product.sell_price }} = </p>
                     </div>
-                    <div class="col p-0"><strong> {{cart.products_price}} $</strong></div>
+                    {# Колонка с общей ценой за товар #}
+                    <div class="col p-0"><strong> {{cart.products_price}} BYN</strong></div>
+                    {# Колонка с ссылкой на удаление товара #}
                     <div class="col p-0">
                         <a href="{% url "cart:cart_remove" %}" class="remove-from-cart"
                         data-cart-id="{{ cart.id }}">
+                            {# Токен для защиты от CSRF #}
                             {% csrf_token %}
+                            {# Иконка для удаления товара #}
                             <img class="mx-1" src="{% static "deps/icons/trash3-fill.svg" %}"
                                 alt="Catalog Icon" width="16" height="16">
                         </a>
@@ -45,12 +63,17 @@
         </ul>
     {% endfor %}
 </div>
+
+{# Карточка с итоговой информацией о корзине #}
 <div class="card mb-3 shadow-lg">
     <div class="card-footer">
+        {# Отображение общего количества товаров и суммы #}
         <p class="float-left">Итого <strong>{{ carts.total_quantity }}</strong> товар(а) на сумму</p>
-        <h4 class="float-left"><strong>{{ carts.total_price }} $</strong></h4>
+        <h4 class="float-left"><strong>{{ carts.total_price }} BYN</strong></h4>
     </div>
 </div>
+
+{# Условный блок: показываем кнопку оформления заказа только если корзина не пуста и нет активного заказа #}
 {% if carts and not order%}
 <a class="btn btn-dark" href="{% url "orders:create_order" %}">
     Оформить заказ

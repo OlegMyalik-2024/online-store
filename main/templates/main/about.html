@@ -1,26 +1,27 @@
 {% extends "base.html" %}
 {% comment %} Подгрузка статических файлов {% endcomment %}
-{% load static %} 
+{% load static %}  {# Загрузка тега static для подключения статических файлов #}
 
 {% block css %}
-    <!-- Стиль footer-a для главной страницы -->
+    <!-- Подключение CSS-стилей, специфичных для этой страницы -->
     <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
 {% endblock css %}
 
 {% block modal_cart %}
+    {# Включение шаблона с кнопкой корзины (например, модальное окно или кнопка) #}
     {% include "includes/cart_button.html" %}
 {% endblock  %}
 
 {% block content %}
-    <!-- Контент на странице -->
+    <!-- Основной контент страницы -->
     <div class="mt-5 pt-5 bg-white custom-shadow rounded p-4">
-        <h2 id="title" class="m-2"><strong>{{ content }}</strong></h2>
-        {{ text_on_page|safe }}
+        <h2 id="title" class="m-2"><strong>{{ content }}</strong></h2>  {# Заголовок страницы, передаваемый из контекста #}
+        {{ text_on_page|safe }}  {# Основной текст страницы, выводится без экранирования HTML #}
     </div>
 {% endblock %}
 
-{% block footer%}
-{% comment %} Футер {% endcomment %}
+{% block footer %}
+{% comment %} Определение содержимого футера страницы {% endcomment %}
     <footer class="py-4 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; HelloMobile 2025</p>

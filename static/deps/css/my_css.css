@@ -1,43 +1,71 @@
+/* Стили для тела страницы (body) */
 body {
+  /* Фоновая картинка с путем относительно текущего файла */
   background-image: url("../images/bg-image.jpg");
+  /* Фон не повторяется */
   background-repeat: no-repeat;
+  /* Фон фиксируется при прокрутке страницы */
   background-attachment: fixed;
+  /* Фон центрируется по горизонтали и вертикали */
   background-position: center center;
+  /* Фон масштабируется, чтобы покрыть весь контейнер */
   background-size: cover;
+  /* Высота тела устанавливается на 100% от высоты окна */
   height: 100%;
 }
 
+/* Убираем стрелку после элемента с классом dropdown-toggle (например, в Bootstrap dropdown) */
 .dropdown-toggle::after {
   content: none;
 }
 
+/* Кастомная тень для элементов с классом custom-shadow */
 .custom-shadow {
   box-shadow: 5px 5px 25px 19px #000000;
 }
 
+/* Стили для элемента с классом product_id (вероятно, ID продукта) */
 .product_id {
+  /* Серый цвет текста */
   color: gray;
+  /* Размер шрифта 15px */
   font-size: 15px;
 }
 
+/* Стили для бейджа с классами bg-warning и text-dark (предупреждающий бейдж) */
 .badge.bg-warning.text-dark {
+  /* Абсолютное позиционирование */
   position: absolute;
+  /* Расположение сверху на 10px */
   top: 10px;
+  /* Расположение справа на 5px */
   right: 5px;
+  /* Z-индекс для наложения поверх других элементов */
   z-index: 1;
+  /* Внутренние отступы */
   padding: 5px 10px;
+  /* Скругление углов */
   border-radius: 3px;
+  /* Размер шрифта */
   font-size: 1rem;
+  /* Тень для бейджа */
   box-shadow: 2px 2px 15px 9px #000000;
 }
 
+/* Стили для бейджа с классом badge-banner */
 .badge-banner {
+  /* Позиция сверху на 80% от родителя */
   top: 80%;
+  /* Скругление углов */
   border-radius: 15px;
+  /* Маленький размер шрифта */
   font-size: 0.7rem;
 }
 
+/* Стили для элемента с ID title */
 #title {
-  color:#121111;
+  /* Темно-серый цвет текста */
+  color: #121111;
+  /* Выравнивание текста по центру */
   text-align: center;
 }

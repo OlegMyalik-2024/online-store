@@ -1,39 +1,50 @@
 {% extends "base.html" %}
-{% comment %} Подгрузка статических файлов {% endcomment %}
-{% load static %} 
-{% load cache %}
-{% load carts_tags %}
-
+{% comment %} Подключаем базовый шаблон с общей структурой страницы {% endcomment %}
+{% load static %}  {# Загружаем тег static для подключения статических файлов #}
+{% load cache %}   {# Загружаем тег cache для кэширования частей шаблона #}
+{% load carts_tags %}  {# Загружаем пользовательские теги для работы с корзиной #}
 
 {% block content %}
-<!-- Контент на странице -->
+<!-- Основной контент страницы профиля пользователя -->
     <div class="row">
         <div class="container mt-5">
             <div class="row">
-                <!-- Профиль с данными пользователя -->
+
+                <!-- Левая колонка: Профиль пользователя -->
                 <div class="col-md-5">
                     <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
                         <h3 class="text-center mb-4">Профиль пользователя</h3>
+
+                        {# Форма обновления профиля пользователя с поддержкой загрузки файлов (аватар) #}
                         <form action="{% url "users:profile" %}" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
+                            {% csrf_token %}  {# Защита от CSRF атак #}
+
                             <div class="row">
+
+                                <!-- Аватар пользователя -->
                                 <div class="col-md-12 mb-3 text-center">
                                     {% if user.image %}
+                                        {# Если у пользователя есть аватар, показываем его #}
                                         <img src="{{user.image.url}}"
                                             alt="Аватар пользователя" class="img-fluid rounded-circle"
                                             style="max-width: 150px;">
+                                        {# Вывод ошибок загрузки изображения, если есть #}
                                         {% if form.image.errors %}
                                             <div class="alert alert-danger alert-dismissible fade show">{{form.image.errors}}</div>
                                         {% endif %}
                                     {% else %}
+                                        {# Если аватара нет — показываем дефолтное изображение #}
                                         <img src="{% static "deps/images/baseavatar.jpg" %}"
                                             alt="Аватар пользователя" class="img-fluid rounded-circle"
                                             style="max-width: 150px;">
                                     {% endif %}
+                                    {# Поле выбора файла для загрузки нового аватара #}
                                     <input type="file" class="form-control mt-3" id="id_image"
                                         name="image"
                                         accept="image/*">
                                 </div>
+
+                                <!-- Имя пользователя -->
                                 <div class="col-md-12 mb-3">
                                     <label for="id_first_name" class="form-label">Имя*</label>
                                     <input type="text" class="form-control" id="id_first_name"
@@ -41,10 +52,13 @@
                                         placeholder="Введите ваше имя" 
                                         value="{{form.first_name.value}}" 
                                         required>
-                                        {% if form.first_name.errors %}
-                                            <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
-                                        {% endif %}
+                                    {# Вывод ошибок валидации для поля first_name #}
+                                    {% if form.first_name.errors %}
+                                        <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
+                                    {% endif %}
                                 </div>
+
+                                <!-- Фамилия пользователя -->
                                 <div class="col-md-12 mb-3">
                                     <label for="id_last_name" class="form-label">Фамилия*</label>
                                     <input type="text" class="form-control" id="id_last_name"
@@ -52,10 +66,12 @@
                                         placeholder="Введите вашу фамилию" 
                                         value="{{form.last_name.value}}" 
                                         required>
-                                        {% if form.last_name.errors %}
-                                            <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
-                                        {% endif %}
+                                    {% if form.last_name.errors %}
+                                        <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
+                                    {% endif %}
                                 </div>
+
+                                <!-- Имя пользователя (username) -->
                                 <div class="col-md-12 mb-3">
                                     <label for="id_username" class="form-label">Имя пользователя*</label>
                                     <input type="text" class="form-control" id="id_username"
@@ -63,10 +79,12 @@
                                         placeholder="Введите ваше имя пользователя" 
                                         value="{{form.username.value}}" 
                                         required>
-                                        {% if form.username.errors %}
-                                            <div class="alert alert-danger alert-dismissible fade show">{{form.username.errors}}</div>
-                                        {% endif %}
+                                    {% if form.username.errors %}
+                                        <div class="alert alert-danger alert-dismissible fade show">{{form.username.errors}}</div>
+                                    {% endif %}
                                 </div>
+
+                                <!-- Email пользователя -->
                                 <div class="col-md-12 mb-3">
                                     <label for="id_email" class="form-label">Email*</label>
                                     <input type="email" class="form-control" id="id_email"
@@ -74,74 +92,92 @@
                                         placeholder="Введите ваш email *youremail@example.com" 
                                         value="{{form.email.value}}"
                                         required>
-                                        {% if form.email.errors %}
-                                            <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
-                                        {% endif %}
+                                    {% if form.email.errors %}
+                                        <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
+                                    {% endif %}
                                 </div>
+
                             </div>
+
+                            {# Кнопка отправки формы #}
                             <button type="submit" class="btn btn-dark">Сохранить</button>
                         </form>
                     </div>
                 </div>
-                <!-- Корзина -->
-                {% user_carts request as carts %}
+
+                <!-- Правая колонка: Корзина пользователя -->
+                {% user_carts request as carts %}  {# Получаем корзины пользователя через кастомный тег #}
                 <div class="col-md-7">
                     <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
                         <h3 class="text-center mb-4">Корзина</h3>
                         <div class="container" id="cart-items-container">
-                            <!-- Разметка корзины -->
+                            <!-- Включаем разметку корзины из отдельного шаблона -->
                             {% include "carts/includes/included_cart.html" %}
-                            <!-- Закончилась разметка корзины -->
                         </div>
                     </div>
                 </div>
-                <!-- Оформленные заказы -->
-                 {% cache 60 user_orders user_id %}
+
+                <!-- Нижний блок: Оформленные заказы пользователя -->
+                {% cache 60 user_orders user_id %}  {# Кэшируем список заказов на 60 секунд, ключ зависит от user_id #}
                 <div class="col-md-12">
                     <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
                         <h3 class="text-center mb-4">Мои заказы</h3>
-                        <!-- Разметка заказов -->
-                                {% for order in orders %}
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading{{ order.id }}">
-                                        <button class="accordion-button {% if order != orders.0 %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ order.id }}" aria-expanded="false" aria-controls="collapse{{ order.id }}">
-                                            Заказ № {{ order.id }} - {{ order.created_timestamp }} | Статус: <strong class="mx-2">{{order.status}}</strong>
-                                        </button>
-                                    </h2>
-                                    <div id="collapse{{ order.id }}" class="accordion-collapse collapse {% if order == orders.0 %}show{% endif %}" aria-labelledby="heading{{ order.id }}" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <table class="table table-dark table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Товар</th>
-                                                        <th>Количество</th>
-                                                        <th>Цена</th>
-                                                        <th>Общая стоимость</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {% for item in order.orderitem_set.all %}
-                                                    <tr>
-                                                        <td><a class="text-white" href="{% url 'products:product' item.product.slug %}">{{ item.product.name }}</a></td>
-                                                        <td>{{ item.quantity }}</td>
-                                                        <td>{{ item.price }}</td>
-                                                        <td>{{ item.products_price }}</td>
-                                                        
-                                                    </tr>
-                                                {% endfor %}
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                        <!-- Список заказов в виде аккордеона -->
+                        {% for order in orders %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading{{ order.id }}">
+                                <button class="accordion-button {% if order != orders.0 %}collapsed{% endif %}" 
+                                    type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapse{{ order.id }}" 
+                                    aria-expanded="false" 
+                                    aria-controls="collapse{{ order.id }}">
+                                    Заказ № {{ order.id }} - {{ order.created_timestamp }} | 
+                                    Статус: <strong class="mx-2">{{order.status}}</strong>
+                                </button>
+                            </h2>
+
+                            <div id="collapse{{ order.id }}" 
+                                class="accordion-collapse collapse {% if order == orders.0 %}show{% endif %}" 
+                                aria-labelledby="heading{{ order.id }}" 
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+                                    <!-- Таблица с товарами заказа -->
+                                    <table class="table table-dark table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Товар</th>
+                                                <th>Количество</th>
+                                                <th>Цена</th>
+                                                <th>Общая стоимость</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in order.orderitem_set.all %}
+                                            <tr>
+                                                <td>
+                                                    <a class="text-white" href="{% url 'products:product' item.product.slug %}">
+                                                        {{ item.product.name }}
+                                                    </a>
+                                                </td>
+                                                <td>{{ item.quantity }}</td>
+                                                <td>{{ item.price }}</td>
+                                                <td>{{ item.products_price }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+
                                 </div>
-                                {% endfor %}
                             </div>
                         </div>
-                        <!-- Закончилась разметка заказов -->
+                        {% endfor %}
+
                     </div>
                 </div>
                 {% endcache %}
+
             </div>
         </div>
     </div>

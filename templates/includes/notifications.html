@@ -1,39 +1,58 @@
+{# Загружаем статические файлы (CSS, JS, изображения) для использования в шаблоне #}
 {% load static %}
 
-<!-- Для non_field_erors  -->
+{# Условный блок для отображения ошибок формы, не связанных с конкретными полями (non_field_errors) #}
 {% if form.non_field_errors %}
     <div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="alert alert-danger alert-dismissible fade show custom-shadow" role="alert">
-                {{form.non_field_errors}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {# Bootstrap-контейнер с отступом сверху #}
+        <div class="row justify-content-center">
+            {# Ряд, центрированный по горизонтали #}
+            <div class="col-md-6">
+                {# Колонка шириной 6 на средних экранах и выше #}
+                <div class="alert alert-danger alert-dismissible fade show custom-shadow" role="alert">
+                    {# Bootstrap-алерт для ошибок: красный цвет, с кнопкой закрытия и анимацией #}
+                    {{ form.non_field_errors }}
+                    {# Выводим ошибки формы #}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    {# Кнопка для закрытия алерта #}
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endif %}
 
-
-<!-- Для оповещений -->
+{# Секция для отображения уведомлений (messages) из Django #}
 <div class="container mt-4">
+    {# Bootstrap-контейнер с отступом сверху #}
     <div class="row justify-content-center">
+        {# Ряд, центрированный по горизонтали #}
         <div class="col-md-6">
+            {# Колонка шириной 6 на средних экранах и выше #}
             {% if messages %}
+                {# Если есть сообщения в контексте #}
                 {% for message in messages %}
+                    {# Цикл по всем сообщениям #}
                     {% if message.tags == 'success' %}
+                        {# Если сообщение типа 'success' (успех) #}
                         <div id="notification" class="position-fixed start-50 translate-middle-x z-3 alert alert-success fade show custom-shadow" role="alert">
+                            {# Фиксированный алерт в центре экрана: зеленый цвет, с анимацией #}
                             {{ message }}
+                            {# Выводим текст сообщения #}
                         </div>
                     {% endif %}
                     {% if message.tags == 'warning' %}
+                        {# Если сообщение типа 'warning' (предупреждение) #}
                         <div id="notification" class="position-fixed start-50 translate-middle-x z-3 alert alert-danger fade show custom-shadow" role="alert">
+                            {# Фиксированный алерт в центре экрана: красный цвет, с анимацией (для предупреждений) #}
                             {{ message }}
+                            {# Выводим текст сообщения #}
                         </div>
                     {% endif %}
                 {% endfor %}
             {% else %}
+                {# Если сообщений нет, показываем скрытый плейсхолдер для AJAX-уведомлений #}
                 <div id="jq-notification" class="position-fixed start-50 translate-middle-x z-3 alert alert-success fade show custom-shadow" style="display: none;" role="alert">
+                    {# Скрытый алерт для динамических уведомлений через JavaScript (например, jQuery) #}
                 </div>
             {% endif %}
         </div>
