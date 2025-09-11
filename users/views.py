@@ -12,6 +12,7 @@ from orders.models import Order, OrderItem
 from users.forms import ProfileForm, UserLoginForm, UserRegistrationForm
 from django.views.generic import CreateView, TemplateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
 
 
@@ -125,3 +126,47 @@ def logout(request):
     messages.success(request, f"{request.user.username}, Вы вышли из аккаунта!")
     auth.logout(request)
     return redirect(reverse("main:index"))
+
+
+# Сброс пароля: форма для ввода email
+class UserPasswordResetView(PasswordResetView):
+    template_name = 'users/password_reset/password_reset.html'  # Шаблон ниже
+    email_template_name = 'users/password_reset/password_reset_email.html'  # Шаблон email ниже
+    success_url = reverse_lazy('users:password_reset_done')
+    subject_template_name = 'users/password_reset/password_reset_subject.txt'  # Тема email
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'HelloMobile - Сброс пароля'
+        return context
+
+
+# После отправки email: страница подтверждения
+class UserPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'users/password_reset/password_reset_done.html'  # Шаблон ниже
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'HelloMobile - Сброс пароля отправлен'
+        return context
+
+
+# Подтверждение сброса: форма для нового пароля
+class UserPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'users/password_reset/password_reset_confirm.html'  # Шаблон ниже
+    success_url = reverse_lazy('users:password_reset_complete')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'HelloMobile - Новый пароль'
+        return context
+
+
+# Завершение сброса: успех
+class UserPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'users/password_reset/password_reset_complete.html'  # Шаблон ниже
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'HelloMobile - Пароль изменен'
+        return context

@@ -23,4 +23,6 @@ app_name='main' #инициализация простанства имен main
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('about/', cache_page(60)(views.AboutView.as_view()), name='about'),
+    path('contacts/', cache_page(60)(views.ContactsView.as_view()), name='contacts'),
+    path('delivery_and_payment/', cache_page(60)(views.Delivery_and_paymentView.as_view()), name='delivery_and_payment'),
 ]

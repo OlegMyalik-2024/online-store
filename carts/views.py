@@ -1,13 +1,14 @@
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.views import View
-
 from carts.mixins import CartMixin
 from carts.models import Cart
 from carts.utils import get_user_carts
+
 from products.models import Products
 
-#Контроллер обработки добавления товара в корзину
+
 class CartAddView(CartMixin, View):
     def post(self, request):
         product_id = request.POST.get("product_id")
@@ -31,9 +32,6 @@ class CartAddView(CartMixin, View):
         return JsonResponse(response_data)
 
 
-
-
-#Контроллер обработки изменения количества товара в корзине    
 class CartChangeView(CartMixin, View):
     def post(self, request):
         cart_id = request.POST.get("cart_id")
@@ -46,17 +44,14 @@ class CartChangeView(CartMixin, View):
         quantity = cart.quantity
 
         response_data = {
-            "message": "Количество изменено!",
+            "message": "Количество изменено",
             "quantity": quantity,
             'cart_items_html': self.render_cart(request)
         }
 
         return JsonResponse(response_data)
-    
-    
-    
-    
-#Контроллер обработки удаления товара из корзины
+
+
 class CartRemoveView(CartMixin, View):
     def post(self, request):
         cart_id = request.POST.get("cart_id")
@@ -66,7 +61,7 @@ class CartRemoveView(CartMixin, View):
         cart.delete()
 
         response_data = {
-            "message": "Товар удален из корзины!",
+            "message": "Товар удален из корзины",
             "quantity_deleted": quantity,
             'cart_items_html': self.render_cart(request)
         }

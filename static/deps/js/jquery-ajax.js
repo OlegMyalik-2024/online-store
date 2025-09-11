@@ -1,7 +1,7 @@
 // Когда html документ готов (прорисован)
 $(document).ready(function () {
     // берем в переменную элемент разметки с id jq-notification для оповещений от ajax
-    let successMessage = $("#jq-notification");
+    var successMessage = $("#jq-notification");
 
     // Ловим собыитие клика по кнопке добавить в корзину
     $(document).on("click", ".add-to-cart", function (e) {
@@ -9,14 +9,14 @@ $(document).ready(function () {
         e.preventDefault();
 
         // Берем элемент счетчика в значке корзины и берем оттуда значение
-        let productsInCartCount = $("#goods-in-cart-count");
-        let cartCount = parseInt(productsInCartCount.text() || 0);
+        var goodsInCartCount = $("#goods-in-cart-count");
+        var cartCount = parseInt(goodsInCartCount.text() || 0);
 
         // Получаем id товара из атрибута data-product-id
-        let product_id = $(this).data("product-id");
+        var product_id = $(this).data("product-id");
 
         // Из атрибута href берем ссылку на контроллер django
-        let add_to_cart_url = $(this).attr("href");
+        var add_to_cart_url = $(this).attr("href");
 
         // делаем post запрос через ajax не перезагружая страницу
         $.ajax({
@@ -37,10 +37,10 @@ $(document).ready(function () {
 
                 // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
                 cartCount++;
-                productsInCartCount.text(cartCount);
+                goodsInCartCount.text(cartCount);
 
                 // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
-                let cartItemsContainer = $("#cart-items-container");
+                var cartItemsContainer = $("#cart-items-container");
                 cartItemsContainer.html(data.cart_items_html);
 
             },
@@ -60,13 +60,13 @@ $(document).ready(function () {
         e.preventDefault();
 
         // Берем элемент счетчика в значке корзины и берем оттуда значение
-        let productsInCartCount = $("#goods-in-cart-count");
-        let cartCount = parseInt(productsInCartCount.text() || 0);
+        var goodsInCartCount = $("#goods-in-cart-count");
+        var cartCount = parseInt(goodsInCartCount.text() || 0);
 
         // Получаем id корзины из атрибута data-cart-id
-        let cart_id = $(this).data("cart-id");
+        var cart_id = $(this).data("cart-id");
         // Из атрибута href берем ссылку на контроллер django
-        let remove_from_cart = $(this).attr("href");
+        var remove_from_cart = $(this).attr("href");
 
         // делаем post запрос через ajax не перезагружая страницу
         $.ajax({
@@ -88,10 +88,10 @@ $(document).ready(function () {
 
                 // Уменьшаем количество товаров в корзине (отрисовка)
                 cartCount -= data.quantity_deleted;
-                productsInCartCount.text(cartCount);
+                goodsInCartCount.text(cartCount);
 
                 // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
-                let cartItemsContainer = $("#cart-items-container");
+                var cartItemsContainer = $("#cart-items-container");
                 cartItemsContainer.html(data.cart_items_html);
 
             },
@@ -109,13 +109,13 @@ $(document).ready(function () {
     // Обработчик события для уменьшения значения
     $(document).on("click", ".decrement", function () {
         // Берем ссылку на контроллер django из атрибута data-cart-change-url
-        let url = $(this).data("cart-change-url");
+        var url = $(this).data("cart-change-url");
         // Берем id корзины из атрибута data-cart-id
-        let cartID = $(this).data("cart-id");
+        var cartID = $(this).data("cart-id");
         // Ищем ближайшеий input с количеством 
-        let $input = $(this).closest('.input-group').find('.number');
+        var $input = $(this).closest('.input-group').find('.number');
         // Берем значение количества товара
-        let currentValue = parseInt($input.val());
+        var currentValue = parseInt($input.val());
         // Если количества больше одного, то только тогда делаем -1
         if (currentValue > 1) {
             $input.val(currentValue - 1);
@@ -128,13 +128,13 @@ $(document).ready(function () {
     // Обработчик события для увеличения значения
     $(document).on("click", ".increment", function () {
         // Берем ссылку на контроллер django из атрибута data-cart-change-url
-        let url = $(this).data("cart-change-url");
+        var url = $(this).data("cart-change-url");
         // Берем id корзины из атрибута data-cart-id
-        let cartID = $(this).data("cart-id");
+        var cartID = $(this).data("cart-id");
         // Ищем ближайшеий input с количеством 
-        let $input = $(this).closest('.input-group').find('.number');
+        var $input = $(this).closest('.input-group').find('.number');
         // Берем значение количества товара
-        let currentValue = parseInt($input.val());
+        var currentValue = parseInt($input.val());
 
         $input.val(currentValue + 1);
 
@@ -154,32 +154,23 @@ $(document).ready(function () {
             },
 
             success: function (data) {
-                 // Сообщение
+                // Сообщение
                 successMessage.html(data.message);
                 successMessage.fadeIn(400);
-                 // Через 7сек убираем сообщение
+                // Через 7сек убираем сообщение
                 setTimeout(function () {
-                     successMessage.fadeOut(400);
+                    successMessage.fadeOut(400);
                 }, 7000);
-                
 
                 // Изменяем количество товаров в корзине
-                let productsInCartCount = $("#goods-in-cart-count")
-                let cartCount = parseInt(productsInCartCount.text() || 0);
+                var goodsInCartCount = $("#goods-in-cart-count");
+                var cartCount = parseInt(goodsInCartCount.text() || 0);
                 cartCount += change;
-                productsInCartCount.text(cartCount);
-
+                goodsInCartCount.text(cartCount);
 
                 // Меняем содержимое корзины
-                let cartItemsContainer = $("#cart-items-container");
+                var cartItemsContainer = $("#cart-items-container");
                 cartItemsContainer.html(data.cart_items_html);
-
-                // Скрываем кнопку "Оформить заказ" на странице create_order.html, на всех остальных отображаем
-                if (typeof page !== 'undefined' && page === 'create_order') {
-                    cartItemsContainer.find('.btn[href*="create_order"]').hide();
-                } else {
-                    cartItemsContainer.find('.btn[href*="create_order"]').show();
-                }
 
             },
             error: function (data) {
@@ -188,17 +179,13 @@ $(document).ready(function () {
         });
     }
 
-
-
-
-    
     // Берем из разметки элемент по id - оповещения от django
-    let notification = $('#notification');
-    // И через 5 сек. убираем
+    var notification = $('#notification');
+    // И через 7 сек. убираем
     if (notification.length > 0) {
         setTimeout(function () {
             notification.alert('close');
-        }, 5000);
+        }, 7000);
     }
 
     // При клике по значку корзины открываем всплывающее(модальное) окно
@@ -208,14 +195,14 @@ $(document).ready(function () {
         $('#exampleModal').modal('show');
     });
 
-    // Событие клик по кнопке закрыть окна корзины
+    // Собыите клик по кнопке закрыть окна корзины
     $('#exampleModal .btn-close').click(function () {
         $('#exampleModal').modal('hide');
     });
 
     // Обработчик события радиокнопки выбора способа доставки
     $("input[name='requires_delivery']").change(function () {
-        let selectedValue = $(this).val();
+        var selectedValue = $(this).val();
         // Скрываем или отображаем input ввода адреса доставки
         if (selectedValue === "1") {
             $("#deliveryAddressField").show();
@@ -223,5 +210,49 @@ $(document).ready(function () {
             $("#deliveryAddressField").hide();
         }
     });
+
+    // Формат ввода телефона в формате (xx)-xxx-xx-xx
+document.getElementById('id_phone_number').addEventListener('input', function (e) {
+    var digits = e.target.value.replace(/\D/g, ''); // убрать все нецифры
+    var result = '';
+
+    if (digits.length > 0) {
+        if (digits.length <= 2) {
+            // пока набрали 1-2 цифры: показываем в скобках
+            result = '(' + digits;
+        } else if (digits.length <= 5) {
+            // две цифры в скобках, далее -3 цифры
+            result = '(' + digits.substring(0, 2) + ')-' + digits.substring(2);
+        } else if (digits.length <= 7) {
+            // далее добавляем две цифры после второго дефиса
+            result = '(' + digits.substring(0, 2) + ')-' + digits.substring(2, 5) + '-' + digits.substring(5);
+        } else {
+            // полный формат: (xx)-xxx-xx-xx
+            result = '(' + digits.substring(0, 2) + ')-' +
+                     digits.substring(2, 5) + '-' +
+                     digits.substring(5, 7) + '-' +
+                     digits.substring(7, 9);
+        }
+    }
+
+    e.target.value = result;
+});
+
+// Проверяем на стороне клиента корректность номера в формате (xx)-xxx-xx-xx
+$('#create_order_form').on('submit', function (event) {
+    var phoneNumber = $('#id_phone_number').val();
+    var regex = /^\(\d{2}\)-\d{3}-\d{2}-\d{2}$/;
+
+    if (!regex.test(phoneNumber)) {
+        $('#phone_number_error').show();
+        event.preventDefault();
+    } else {
+        $('#phone_number_error').hide();
+
+        // Очистка номера телефона от скобок и тире перед отправкой формы
+        var cleanedPhoneNumber = phoneNumber.replace(/[()\-\s]/g, '');
+        $('#id_phone_number').val(cleanedPhoneNumber);
+    }
+});
 
 });

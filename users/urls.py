@@ -25,4 +25,10 @@ urlpatterns = [
     path('profile/', views.UserProfileView.as_view(), name='profile'),
     path('users-cart/', views.UserCartView.as_view(), name='users_cart'),
     path('logout/', views.logout, name='logout'),
+    
+     # Новые маршруты для сброса пароля
+    path('password-reset/', views.UserPasswordResetView.as_view(), name='password_reset'),
+    path('password-reset/done/', views.UserPasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('password-reset/<uidb64>/<token>/', views.UserPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('password-reset/complete/', views.UserPasswordResetCompleteView.as_view(), name='password_reset_complete'),
 ]

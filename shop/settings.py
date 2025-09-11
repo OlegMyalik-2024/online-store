@@ -159,3 +159,14 @@ AUTH_USER_MODEL='users.User'
 #Переопределение собственного представления login
 LOGIN_URL='/user/login/'
 LOGIN_REDIRECT_URL='/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Для продакшена (замените на реальные данные)
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'  # Или ваш SMTP-сервер
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'your-email@gmail.com'
+# EMAIL_HOST_PASSWORD = 'your-password'
+# DEFAULT_FROM_EMAIL = 'your-email@gmail.com'
