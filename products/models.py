@@ -124,3 +124,9 @@ class Products(models.Model):
         if self.discount:
             return round(self.price - self.price * self.discount / 100, 2)
         return self.price
+    
+    # Новое свойство: проверка наличия изображения
+    @property
+    def has_image(self):
+        # Возвращает True, если изображение загружено и файл существует
+        return bool(self.image and self.image.name)

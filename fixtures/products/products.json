@@ -1,114 +1,856 @@
 [
     {
         "model": "products.products",
-        "pk": 1,
+        "pk": 10,
         "fields": {
-            "name": "Samsung Galaxy S23",
-            "slug": "samsung-galaxy-s23",
-            "description": "Флагманский смартфон с 6.1-дюймовым Dynamic AMOLED 2X дисплеем, тройной камерой 50 МП и процессором Snapdragon 8 Gen 2. Поддержка 120 Гц и быстрой зарядки.",
-            "image": "products_images/Samsung_Galaxy_S23.png",
-            "price": "800.00",
-            "discount": "10.50",
+            "name": "Samsung Galaxy S25 Ultra 512GB Phantom Silver",
+            "slug": "samsung-galaxy-s25-ultra-512gb-phantom-silver",
+            "description": "Samsung Galaxy S25 Ultra 512GB Phantom Silver — ультрафлагман с титановым корпусом, 6.9″ Dynamic AMOLED 2X-дисплеем и мощным процессором Snapdragon 8 Elite. Оснащён 200 Мп камерой с 8K-видео, встроенным стилусом S Pen, аккумулятором 5000 мАч и поддержкой Wi-Fi 7, Bluetooth 5.4 и USB-C 3.2. Работает на Android 15 с интеграцией Galaxy AI2.",
+            "image": "products_images/BCO.4e8bdce9-57c8-458d-adb3-fb85c83e09e7.png",
+            "price": "3000.00",
+            "discount": "15.50",
+            "quantity": 30,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 11,
+        "fields": {
+            "name": "Xiaomi 15 Pro 12/256GB Ceramic White",
+            "slug": "xiaomi-15-pro-12256gb-ceramic-white",
+            "description": "Xiaomi 15 Pro 12/256GB Ceramic White — флагманский смартфон с премиальным керамическим корпусом, мощным процессором Snapdragon 8 Elite и тройной камерой Leica по 50 Мп. Оснащён 6.73″ OLED-дисплеем с частотой 120 Гц, аккумулятором 6100 мАч с быстрой зарядкой 90W и защитой IP68. Работает на HyperOS 2.0, поддерживает 5G, Wi-Fi 7 и Bluetooth 5.42.",
+            "image": "products_images/BCO.6ab51ec3-3742-49e5-9beb-9bbc4aae0812.png",
+            "price": "2500.00",
+            "discount": "0.00",
+            "quantity": 25,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 12,
+        "fields": {
+            "name": "Apple iPhone 15 Pro Max 256GB Titanium Black",
+            "slug": "apple-iphone-15-pro-max-256gb-titanium-black",
+            "description": "Apple iPhone 15 Pro Max 256GB Titanium Black — премиальный смартфон с титановым корпусом, 6.7″ OLED-дисплеем Super Retina XDR и чипом A17 Pro. Оснащён тройной камерой 48+12+12 Мп с 5-кратным оптическим зумом, LiDAR-сканером и поддержкой 4K HDR-видео. Имеет USB-C, защиту IP68, Face ID, Always-On Display и работает на iOS 172.",
+            "image": "products_images/BCO.8fd34e39-8924-4ed4-870b-2daf01be5610.png",
+            "price": "3500.00",
+            "discount": "25.50",
+            "quantity": 50,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 13,
+        "fields": {
+            "name": "OnePlus 13 16/512GB Glacier Blue",
+            "slug": "oneplus-13-16512gb-glacier-blue",
+            "description": "OnePlus 13 16/512GB Glacier Blue — флагманский смартфон с 6.82″ AMOLED-дисплеем ProXDR (120 Гц), мощным процессором Snapdragon 8 Elite и тройной камерой 50+50+50 Мп от Sony. Оснащён аккумулятором 6000 мАч с быстрой зарядкой 100W SUPERVOOC и беспроводной 50W AIRVOOC. Работает на OxygenOS 15 (Android 15), имеет защиту IP69 и стильный корпус в цвете Glacier Blue2.",
+            "image": "products_images/BCO.5493d5af-a470-4a06-9cce-50e33d3589a9.png",
+            "price": "3750.00",
+            "discount": "5.00",
+            "quantity": 34,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 14,
+        "fields": {
+            "name": "Google Pixel 9 Pro 128GB Obsidian",
+            "slug": "google-pixel-9-pro-128gb-obsidian",
+            "description": "Google Pixel 9 Pro 128GB Obsidian — флагман от Google с 6.3″ LTPO OLED-дисплеем (120 Гц), фирменным чипом Tensor G4 и тройной камерой 50+48+48 Мп с 8K-видеосъёмкой. Оснащён 42 Мп фронтальной камерой, аккумулятором 4700 мАч, защитой IP68 и Android 14 с интеграцией Google AI. Стильный корпус из стекла и алюминия в цвете Obsidian подчёркивает премиальность устройства.",
+            "image": "products_images/BCO.4ada5ea6-bc17-4457-875e-f8f6e5957649.png",
+            "price": "2300.00",
+            "discount": "0.00",
+            "quantity": 32,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 15,
+        "fields": {
+            "name": "Honor Magic7 Pro 12/512GB Midnight Purple",
+            "slug": "honor-magic7-pro-12512gb-midnight-purple",
+            "description": "Honor Magic7 Pro 12/512GB Midnight Purple — мощный флагман с 6.8″ OLED-дисплеем (120 Гц, HDR до 5000 нит), тройной камерой 50+50+200 Мп с 100-кратным цифровым зумом и 4K-видеосъёмкой. Работает на Snapdragon 8 Elite, оснащён аккумулятором 5850 мАч, защитой IP69 и системой MagicOS 9.0 на базе Android 15. Элегантный корпус в цвете Midnight Purple подчёркивает премиальность устройства.",
+            "image": "products_images/BCO.4827b08f-24d5-4cc9-802a-7ce143c50c2b.png",
+            "price": "2930.50",
+            "discount": "12.40",
+            "quantity": 20,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 16,
+        "fields": {
+            "name": "Huawei P70 Pro 5G 256GB Emerald Green",
+            "slug": "huawei-p70-pro-5g-256gb-emerald-green",
+            "description": "Huawei P70 Pro 5G 256GB Emerald Green — элегантный флагман с 6.8″ OLED LTPO-дисплеем (120 Гц), тройной камерой 50+48+12.5 Мп с 3.5-кратным оптическим и 100-кратным цифровым зумом. Работает на чипе Kirin 9010, оснащён аккумулятором 5050 мАч с быстрой зарядкой 100W и беспроводной 80W. Имеет защиту IP68, поддержку 5G, Wi-Fi 6 и NFC. Цвет Emerald Green подчёркивает премиальность и стиль устройства.",
+            "image": "products_images/BCO.68577c1c-3258-4552-8192-ac7dc3b7d2a3.png",
+            "price": "2345.00",
+            "discount": "0.00",
+            "quantity": 23,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 17,
+        "fields": {
+            "name": "Sony Xperia 1 VI 12/256GB Frosted Gray",
+            "slug": "sony-xperia-1-vi-12256gb-frosted-gray",
+            "description": "Sony Xperia 1 VI 12/256GB Frosted Gray — стильный флагман с 6.5″ OLED-дисплеем (120 Гц), процессором Snapdragon 8 Gen 3 и тройной камерой 48+12+12 Мп с оптической стабилизацией. Оснащён аккумулятором 5000 мАч, поддерживает быструю и беспроводную зарядку, имеет защиту IP68 и слот для microSD до 1 ТБ. Работает на Android 14, корпус выполнен из алюминия и стекла в цвете Frosted Gray.",
+            "image": "products_images/BCO.23536c2f-ca11-42f7-b936-4359113fed3c.png",
+            "price": "2800.00",
+            "discount": "0.00",
+            "quantity": 10,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 18,
+        "fields": {
+            "name": "Motorola Edge 50 Ultra 12/512GB Solar Gold",
+            "slug": "motorola-edge-50-ultra-12512gb-solar-gold",
+            "description": "Motorola Edge 50 Ultra 12/512GB Solar Gold — премиальный смартфон с 6.7″ P-OLED-дисплеем (144 Гц, HDR10+, 2500 нит), мощным чипом Snapdragon 8s Gen 3 и тройной камерой 50+64+50 Мп с 3-кратным оптическим зумом. Оснащён фронтальной камерой 50 Мп, аккумулятором 4500 мАч и быстрой зарядкой 125W (беспроводная — 50W). Корпус выполнен из веганской кожи или дерева, защита IP68, Android 14, поддержка Wi-Fi 7, eSIM и NFC.",
+            "image": "products_images/BCO.656dc8ca-148d-48d2-9242-c18040ae5117.png",
+            "price": "2630.00",
+            "discount": "2.00",
+            "quantity": 12,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 19,
+        "fields": {
+            "name": "Asus ROG Phone 9 Pro 16/512GB Matte Black",
+            "slug": "asus-rog-phone-9-pro-16512gb-matte-black",
+            "description": "Asus ROG Phone 9 Pro 16/512GB Matte Black — мощный геймерский смартфон с 6.78″ AMOLED-дисплеем (185 Гц, HDR10+, 2500 нит), процессором Snapdragon 8 Elite и тройной камерой 50+32+13 Мп. Оснащён аккумулятором 5800 мАч, системой активного охлаждения, поддержкой быстрой и беспроводной зарядки, а также защитой IP68. Работает на Android 15, имеет встроенные AirTrigger-кнопки и стильный корпус Matte Black, созданный для максимального погружения в игру.",
+            "image": "products_images/BCO.255b7bb4-2af3-4deb-9e7b-666b26d06584.png",
+            "price": "3000.00",
+            "discount": "7.00",
+            "quantity": 18,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 20,
+        "fields": {
+            "name": "Samsung Galaxy A76 6/128GB Ice Blue",
+            "slug": "samsung-galaxy-a76-6128gb-ice-blue",
+            "description": "Samsung Galaxy A76 6/128GB Ice Blue — стильный смартфон среднего класса с большим 6.72″ AMOLED-дисплеем (120 Гц, HDR), четырьмя основными камерами (64+12+8+5 Мп) и фронтальной на 32 Мп. Работает на Android 15 с чипом Snapdragon 8 Gen 1, оснащён аккумулятором 5000 мАч и поддерживает 5G, NFC и быструю зарядку. Цвет Ice Blue — холодный голубой с глянцевым акцентом, подчёркивающий свежий и современный дизайн.",
+            "image": "products_images/BCO.9786a17d-0c2c-4e09-aa38-1e2b274a9d07.png",
+            "price": "1900.00",
+            "discount": "0.00",
+            "quantity": 30,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 21,
+        "fields": {
+            "name": "Xiaomi Redmi Note 14 Pro 8/256GB Graphite Gray",
+            "slug": "xiaomi-redmi-note-14-pro-8256gb-graphite-gray",
+            "description": "Xiaomi Redmi Note 14 Pro 8/256GB Graphite Gray — мощный смартфон среднего класса с флагманскими амбициями. Оснащён 6.67″ AMOLED-дисплеем (120 Гц, 1800 нит, Gorilla Glass Victus 2), работает на чипе MediaTek Helio G100-Ultra и предлагает 8 ГБ оперативной и 256 ГБ встроенной памяти (UFS 2.2). Основная камера — 200 Мп с OIS и AI, дополнена шириком 8 Мп и макро 2 Мп. Фронтальная — 32 Мп. Аккумулятор 5500 мАч с быстрой зарядкой 45W, защита IP68, NFC, Dolby Atmos, разъём 3.5 мм и фирменная оболочка HyperOS2.",
+            "image": "products_images/BCO.cb47c5c5-aeed-4dce-9de7-95fa7e8f2aa3.png",
+            "price": "1730.00",
+            "discount": "1.20",
+            "quantity": 12,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 22,
+        "fields": {
+            "name": "Realme GT Neo 6 12/256GB Pulse Silver",
+            "slug": "realme-gt-neo-6-12256gb-pulse-silver",
+            "description": "Realme GT Neo 6 12/256GB Pulse Silver — производительный смартфон с флагманскими характеристиками и стильным дизайном. Оснащён 6.78″ AMOLED-дисплеем (1264×2780, 120 Гц, HDR10+, яркость до 6000 нит), работает на мощном чипе Snapdragon 8s Gen 3, имеет 12 ГБ оперативной памяти (LPDDR5X) и 256 ГБ хранилища (UFS 4.0).",
+            "image": "products_images/BCO.697aa627-a585-424a-9c71-f5dafce26202.png",
+            "price": "1430.00",
+            "discount": "0.00",
+            "quantity": 35,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 23,
+        "fields": {
+            "name": "POCO F6 Pro 8/256GB Electric Green",
+            "slug": "poco-f6-pro-8256gb-electric-green",
+            "description": "POCO F6 Pro 8/256GB Electric Green — производительный смартфон с флагманским дисплеем и мощным чипом Snapdragon 8 Gen 2. Оснащён 6.67″ AMOLED-экраном с разрешением 3200×1440, частотой 120 Гц и яркостью до 4000 нит (HDR10+, Dolby Vision).",
+            "image": "products_images/BCO.f57c35f3-7305-49fb-aa26-274a8951bee7.png",
+            "price": "1200.00",
+            "discount": "0.00",
+            "quantity": 8,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 24,
+        "fields": {
+            "name": "Vivo V30 Pro 12/256GB Sunset Orange",
+            "slug": "vivo-v30-pro-12256gb-sunset-orange",
+            "description": "Vivo V30 Pro 12/256GB Sunset Orange — элегантный смартфон с акцентом на мобильную фотографию и стиль. Оснащён 6.78″ AMOLED-дисплеем (1260×2800, 120 Гц, HDR10+, яркость до 2800 нит), работает на чипе MediaTek Dimensity 8200 и предлагает 12 ГБ оперативной и 256 ГБ встроенной памяти.",
+            "image": "products_images/BCO.249e1afd-6c74-4ac8-99e2-aa9f67b81f6e.png",
+            "price": "1630.00",
+            "discount": "2.00",
+            "quantity": 19,
+            "category": 5
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 25,
+        "fields": {
+            "name": "Infinix Zero 30 5G 8/128GB Cosmic Black",
+            "slug": "infinix-zero-30-5g-8128gb-cosmic-black",
+            "description": "Infinix Zero 30 5G 8/128GB Cosmic Black — стильный и доступный смартфон с акцентом на фото и экран. Оснащён 6.78″ AMOLED-дисплеем с частотой 144 Гц и яркостью до 950 нит, защищён стеклом Gorilla Glass 5. Работает на чипе MediaTek Dimensity 8020, имеет 8 ГБ оперативной памяти (с расширением до 21 ГБ) и 128 ГБ хранилища (UFS 3.1).",
+            "image": "products_images/BCO.dfe6ffbd-acbc-4fb3-ad8e-b5ef3ace0f88.png",
+            "price": "1230.00",
+            "discount": "0.00",
             "quantity": 14,
-            "category": 3
+            "category": 5
         }
     },
     {
         "model": "products.products",
-        "pk": 2,
+        "pk": 26,
         "fields": {
-            "name": "Samsung Galaxy A54",
-            "slug": "samsung-galaxy-a54",
-            "description": "Бюджетный смартфон с 6.4-дюймовым Super AMOLED дисплеем, тройной камерой 50 МП и батареей 5000 мАч. Идеален для повседневного использования с поддержкой 5G.",
-            "image": "products_images/Samsung_Galaxy_A54.png",
-            "price": "350.00",
+            "name": "Tecno Phantom V Flip 8/256GB Moonlit Violet",
+            "slug": "tecno-phantom-v-flip-8256gb-moonlit-violet",
+            "description": "Tecno Phantom V Flip 8/256GB Moonlit Violet — стильный смартфон-раскладушка с гибким AMOLED-дисплеем, мощной камерой и премиальным дизайном по доступной цене. Цвет Moonlit Violet — элегантный сиреневый с мягким перламутровым отливом. Корпус выполнен из эко-кожи, а складной механизм надёжен и плавен. В сложенном виде — компактный аксессуар, в раскрытом — полноценный флагман.",
+            "image": "products_images/BCO.a93d796c-5c8c-4a03-8628-91e1b51d80da.png",
+            "price": "1890.00",
             "discount": "0.00",
-            "quantity": 6,
-            "category": 3
+            "quantity": 28,
+            "category": 5
         }
     },
     {
         "model": "products.products",
-        "pk": 3,
+        "pk": 27,
         "fields": {
-            "name": "Samsung Galaxy Z Fold 5",
-            "slug": "samsung-galaxy-z-fold-5",
-            "description": "Складной смартфон с 7.6-дюймовым внутренним дисплеем и 6.2-дюймовым внешним, тройной камерой 50 МП и процессором Snapdragon 8 Gen 2. Подходит для мультизадачности.",
-            "image": "products_images/Samsung_Galaxy_Z_Fold_5.png",
-            "price": "1800.00",
-            "discount": "30.50",
-            "quantity": 4,
-            "category": 3
+            "name": "Nokia X50 6/128GB Nordic Blue",
+            "slug": "nokia-x50-6128gb-nordic-blue",
+            "description": "Nokia X50 6/128GB Nordic Blue — сбалансированный смартфон с акцентом на камеру, автономность и чистый Android. Оснащён 6.5″ PureDisplay V4 с разрешением 3200×1440 и частотой обновления 120 Гц, защищён стеклом Gorilla Glass. Работает на чипе Snapdragon 780G, имеет 6 ГБ оперативной и 128 ГБ встроенной памяти с возможностью расширения через microSD.",
+            "image": "products_images/BCO.f44b34f3-2536-4417-9f80-a1c68d9891fc.png",
+            "price": "2320.00",
+            "discount": "10.00",
+            "quantity": 32,
+            "category": 5
         }
     },
     {
         "model": "products.products",
-        "pk": 4,
+        "pk": 28,
         "fields": {
-            "name": "Samsung Galaxy S24",
-            "slug": "samsung-galaxy-s24",
-            "description": "Новейший флагман с 6.2-дюймовым Dynamic AMOLED 2X дисплеем, тройной камерой 50 МП с AI-функциями и поддержкой Google AI. Мощный процессор и быстрая зарядка.",
-            "image": "products_images/Samsung_Galaxy_S24.png",
-            "price": "900.00",
-            "discount": "0.00",
-            "quantity": 9,
-            "category": 3
+            "name": "ZTE Axon 50 Ultra 12/256GB Aurora White",
+            "slug": "zte-axon-50-ultra-12256gb-aurora-white",
+            "description": "ZTE Axon 50 Ultra 12/256GB Aurora White — флагманский смартфон с мощной начинкой, премиальным дизайном и акцентом на безопасность и производительность. Цвет Aurora White — перламутрово-белый с мягким сиянием, напоминающим северное сияние. Элегантный корпус с тонкими рамками и матовой текстурой подчёркивает премиальность устройства.",
+            "image": "products_images/BCO.934e95ee-1b54-44f4-b698-3d35bef42c56.png",
+            "price": "2500.00",
+            "discount": "8.00",
+            "quantity": 21,
+            "category": 5
         }
     },
     {
         "model": "products.products",
-        "pk": 5,
+        "pk": 29,
         "fields": {
-            "name": "Xiaomi 13",
-            "slug": "xiaomi-13",
-            "description": "Флагманский смартфон с 6.36-дюймовым AMOLED дисплеем, тройной камерой 50 МП и процессором Snapdragon 8 Gen 2. Поддержка HyperCharge и MIUI 14.",
-            "image": "products_images/Xiaomi_13.png",
-            "price": "700.00",
+            "name": "Cubot KingKong AX 8/128GB Rugged Black",
+            "slug": "cubot-kingkong-ax-8128gb-rugged-black",
+            "description": "Cubot KingKong AX 8/128GB Rugged Black — защищённый смартфон с двойным экраном, мощной камерой и высокой ударопрочностью. Идеален для активного образа жизни и экстремальных условий. Цвет Rugged Black — матовый чёрный с индустриальным акцентом, подчёркивающий надёжность и функциональность. Смартфон буквально «встроен» в защитный чехол — готов к любым испытаниям.",
+            "image": "products_images/BCO.be832e85-cb5a-4a13-a066-75ba6f14fdf8.png",
+            "price": "2000.00",
             "discount": "0.00",
             "quantity": 15,
-            "category": 4
+            "category": 5
         }
     },
     {
         "model": "products.products",
-        "pk": 6,
+        "pk": 30,
         "fields": {
-            "name": "Redmi Note 13 Pro",
-            "slug": "redmi-note-13-pro",
-            "description": "Мощный смартфон с 6.67-дюймовым AMOLED дисплеем, камерой 200 МП и батареей 5000 мАч. Отличный выбор для фото и игр с поддержкой 120 Гц.",
-            "image": "products_images/Redmi_Note_13_Pro.png",
+            "name": "Apple iPad Pro 12.9 (2024)",
+            "slug": "apple-ipad-pro-129-2024",
+            "description": "Apple iPad Pro 12.9 (2024) — это воплощение инженерной элегантности и производительной мощи. Планшет получил ультратонкий корпус толщиной всего 5.1 мм, что делает его самым тонким iPad в истории. Он лёгкий, прочный и идеально подходит для мобильной работы, будь то редактирование фотографий, видеомонтаж или дизайн.",
+            "image": "products_images/BCO.35799e82-9486-4c14-abcd-a5380409a45e.png",
+            "price": "3950.00",
+            "discount": "10.00",
+            "quantity": 8,
+            "category": 6
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 31,
+        "fields": {
+            "name": "Samsung Galaxy Tab S9 Ultra",
+            "slug": "samsung-galaxy-tab-s9-ultra",
+            "description": "Samsung Galaxy Tab S9 Ultra — это флагманский планшет, созданный для тех, кто хочет максимум от мобильного устройства. Он сочетает в себе огромный экран, мощную начинку и премиальный дизайн, превращая планшет в полноценную рабочую станцию.",
+            "image": "products_images/BCO.70a24066-92e5-4f4b-9e70-af9efb186b55.png",
+            "price": "3830.00",
+            "discount": "0.00",
+            "quantity": 14,
+            "category": 6
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 32,
+        "fields": {
+            "name": "Xiaomi Pad 6 Pro",
+            "slug": "xiaomi-pad-6-pro",
+            "description": "Xiaomi Pad 6 Pro — это мощный и стильный планшет, ориентированный на производительность, мультимедиа и комфортную работу. Он сочетает в себе флагманский процессор, качественный экран и премиальный металлический корпус, оставаясь при этом доступным по цене.",
+            "image": "products_images/BCO.733f06fa-9df6-4664-bee2-3daf9e95cbe2.png",
+            "price": "2910.00",
+            "discount": "25.30",
+            "quantity": 15,
+            "category": 6
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 33,
+        "fields": {
+            "name": "Huawei MatePad Pro 13.2",
+            "slug": "huawei-matepad-pro-132",
+            "description": "Huawei MatePad Pro 13.2 — это премиальный планшет с большим OLED-экраном, ориентированный на профессиональное использование, творчество и мобильную продуктивность.",
+            "image": "products_images/BCO.0382f891-9e27-4164-a2df-42f88483599c.png",
+            "price": "2230.00",
+            "discount": "0.00",
+            "quantity": 23,
+            "category": 6
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 34,
+        "fields": {
+            "name": "Lenovo Tab P12 Pro",
+            "slug": "lenovo-tab-p12-pro",
+            "description": "Lenovo Tab P12 Pro — это премиальный Android-планшет, ориентированный на мультимедийные и рабочие задачи, с большим AMOLED-экраном, мощным процессором и тонким металлическим корпусом.",
+            "image": "products_images/BCO.6bff22f6-18ab-4638-ad2e-ab8f5a40fee2.png",
+            "price": "4000.00",
+            "discount": "2.30",
+            "quantity": 10,
+            "category": 6
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 35,
+        "fields": {
+            "name": "Microsoft Surface Pro 9",
+            "slug": "microsoft-surface-pro-9",
+            "description": "Microsoft Surface Pro 9 — это гибрид планшета и ноутбука, созданный для тех, кто ценит мобильность, производительность и универсальность. Он объединяет в себе элегантный дизайн, мощные компоненты и возможности полноценного ПК.",
+            "image": "products_images/BCO.9f6cfe11-de05-4809-920a-1a75db687d82.png",
+            "price": "2460.00",
+            "discount": "5.00",
+            "quantity": 25,
+            "category": 6
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 36,
+        "fields": {
+            "name": "ASUS ROG Flow Z13",
+            "slug": "asus-rog-flow-z13",
+            "description": "ASUS ROG Flow Z13 (2025) — это уникальный гибрид планшета и игрового ноутбука, сочетающий ультрапортативность с настоящей геймерской мощью. Он создан для тех, кто хочет запускать AAA-игры, работать с графикой и моделями ИИ — всё это на компактном 13-дюймовом устройстве.",
+            "image": "products_images/BCO.1a3ae992-ef32-428d-9ca0-879387c8733f.png",
+            "price": "1890.00",
+            "discount": "0.00",
+            "quantity": 10,
+            "category": 6
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 37,
+        "fields": {
+            "name": "Realme Pad 2",
+            "slug": "realme-pad-2",
+            "description": "Realme Pad 2 — это доступный и сбалансированный Android-планшет, который предлагает впечатляющие характеристики по демократичной цене. Он отлично подойдёт для мультимедиа, учёбы и лёгких игр.",
+            "image": "products_images/BCO.7497b54a-4599-4130-9d78-558c0dbbc3df.png",
+            "price": "1755.00",
+            "discount": "10.00",
+            "quantity": 35,
+            "category": 6
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 38,
+        "fields": {
+            "name": "Honor Pad 9",
+            "slug": "honor-pad-9",
+            "description": "Honor Pad 9 — это стильный и мощный планшет среднего класса, который отлично подойдёт для мультимедиа, учёбы и повседневной работы. Он сочетает в себе большой экран, качественный звук и современную начинку.",
+            "image": "products_images/BCO.80969cff-9ac8-4013-b119-c18af0ae2802.png",
+            "price": "1980.00",
+            "discount": "3.00",
+            "quantity": 19,
+            "category": 6
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 39,
+        "fields": {
+            "name": "Teclast T50",
+            "slug": "teclast-t50",
+            "description": "Teclast T50 — это доступный планшет из Китая, который предлагает достойную производительность, большой экран и поддержку мобильной связи, оставаясь при этом в бюджетной категории. Он подойдёт для мультимедиа, серфинга, учёбы и базовых рабочих задач.",
+            "image": "products_images/BCO.ae4dea00-9b65-44e4-aeaa-eea34e8c1965.png",
+            "price": "1645.00",
+            "discount": "0.00",
+            "quantity": 20,
+            "category": 6
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 40,
+        "fields": {
+            "name": "Xiaomi Smart Band 9",
+            "slug": "xiaomi-smart-band-9",
+            "description": "Xiaomi Smart Band 9 — это стильный и функциональный фитнес-браслет, сочетающий яркий AMOLED-дисплей, расширенные возможности мониторинга здоровья и отличную автономность. Он подойдёт как для активных пользователей, так и для тех, кто просто хочет отслеживать базовые показатели в течение дня.",
+            "image": "products_images/BCO.ca11eec9-84a6-4764-9fc4-52136ba15806.png",
+            "price": "400.00",
+            "discount": "2.00",
+            "quantity": 40,
+            "category": 7
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 41,
+        "fields": {
+            "name": "Xiaomi Smart Band 9 Pro",
+            "slug": "xiaomi-smart-band-9-pro",
+            "description": "Xiaomi Smart Band 9 Pro — это продвинутый фитнес-браслет с большим AMOLED-дисплеем, встроенным GPS и расширенными функциями мониторинга здоровья. Он стал логичным развитием серии, предлагая премиальные материалы и улучшенную автономность.",
+            "image": "products_images/BCO.5524fd9f-8cf8-43e8-bd03-052290e5b95e.png",
+            "price": "950.00",
+            "discount": "0.00",
+            "quantity": 30,
+            "category": 7
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 42,
+        "fields": {
+            "name": "Huawei Band 9",
+            "slug": "huawei-band-9",
+            "description": "Huawei Band 9 — это лёгкий, стильный и функциональный фитнес-браслет, созданный для комфортного повседневного ношения и точного мониторинга здоровья. Он сочетает в себе премиальный дизайн, улучшенные сенсоры и длительное время автономной работы.",
+            "image": "products_images/BCO.3adb3d99-d200-415a-9a03-84ad3f3e608b.png",
+            "price": "250.00",
+            "discount": "0.00",
+            "quantity": 34,
+            "category": 7
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 43,
+        "fields": {
+            "name": "Samsung Galaxy Fit3",
+            "slug": "samsung-galaxy-fit3",
+            "description": "Samsung Galaxy Fit3 — это лёгкий, надёжный и стильный фитнес-браслет с большим AMOLED-дисплеем и длительной автономностью. Он подойдёт тем, кто хочет отслеживать здоровье и активность без лишних функций и переплат.",
+            "image": "products_images/BCO.03319079-2a48-4bfe-9627-188c1677e040.png",
+            "price": "470.00",
+            "discount": "5.00",
+            "quantity": 23,
+            "category": 7
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 44,
+        "fields": {
+            "name": "Xiaomi Smart Band 8 Active",
+            "slug": "xiaomi-smart-band-8-active",
+            "description": "Xiaomi Smart Band 8 Active — это бюджетный фитнес-браслет с базовым набором функций, стильным дизайном и достойной автономностью. Он подойдёт тем, кто хочет отслеживать активность и здоровье без лишних затрат.",
+            "image": "products_images/BCO.02508908-7e8d-49fc-a741-266d0a52cec3.png",
+            "price": "120.00",
+            "discount": "0.00",
+            "quantity": 50,
+            "category": 7
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 45,
+        "fields": {
+            "name": "Apple Watch Series 10",
+            "slug": "apple-watch-series-10",
+            "description": "Apple Watch Series 10 — это не просто эволюция, а переосмысление концепции умение концепции умных часов. Тонкий корпус, яркий экран, премиальные материальных часов. Тонкий корпус, яркий экран, премиальные материалы и расширенные функции здоровья делают их идеальным компаньоном для активной жизни и забот и расширенные функции здоровья делают их идеальным компаньоном для активной жизни и заботы о себе.",
+            "image": "products_images/BCO.3f7dfe16-4e3b-4831-9aaf-a25bcfe1359c.png",
+            "price": "1200.00",
+            "discount": "10.00",
+            "quantity": 23,
+            "category": 7
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 46,
+        "fields": {
+            "name": "Apple Watch SE 2",
+            "slug": "apple-watch-se-2",
+            "description": "Apple Watch SE 2 — это сбалансированные умные часы с мощным процессором, стильным дизайном и всеми ключевыми функциями Apple Watch, кроме премиальных датчиков. Отличный вариант для первого знакомства с экосистемой Apple.",
+            "image": "products_images/BCO.90292eec-eae7-4148-9904-af16154ff7fb.png",
+            "price": "1000.00",
+            "discount": "5.00",
+            "quantity": 18,
+            "category": 7
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 47,
+        "fields": {
+            "name": "Huawei Watch GT 5 Pro",
+            "slug": "huawei-watch-gt-5-pro",
+            "description": "Huawei Watch GT 5 Pro — это часы для тех, кто ценит премиальные материалы, точные датчики и надёжную автономность. Они подойдут как для спорта, так и для повседневного использования, включая экстремальные условия. Это флагманская модель, сочетающая стиль и функциональность.",
+            "image": "products_images/BCO.383ef7e7-8465-418d-92c0-7be2f0ac0fef.png",
             "price": "400.00",
             "discount": "0.00",
-            "quantity": 24,
-            "category": 4
+            "quantity": 10,
+            "category": 7
         }
     },
     {
         "model": "products.products",
-        "pk": 7,
+        "pk": 48,
         "fields": {
-            "name": "Xiaomi 12S Ultra",
-            "slug": "xiaomi-12s-ultra",
-            "description": "Профессиональный фото-смартфон с 6.73-дюймовым AMOLED дисплеем, камерой 50.3 МП от Leica и процессором Snapdragon 8+ Gen 1. Идеален для любителей фотографии.",
-            "image": "products_images/Xiaomi_12S_Ultra.png",
-            "price": "1200.00",
-            "discount": "8.00",
-            "quantity": 7,
-            "category": 4
-        }
-    },
-    {
-        "model": "products.products",
-        "pk": 8,
-        "fields": {
-            "name": "Redmi 12",
-            "slug": "redmi-12",
-            "description": "Бюджетный смартфон с 6.79-дюймовым IPS дисплеем, камерой 50 МП и батареей 5000 мАч. Поддержка 5G и быстрая зарядка 18 Вт.",
-            "image": "products_images/Redmi_12.png",
-            "price": "200.00",
+            "name": "Xiaomi Redmi Watch 5 Active",
+            "slug": "xiaomi-redmi-watch-5-active",
+            "description": "Redmi Watch 5 Active — это «топ за свои деньги» для тех, кто хочет большой экран, базовые функции здоровья и тренировок, а также звонки по Bluetooth. Отличный выбор для повседневного использования без переплаты за премиальные функции.",
+            "image": "products_images/BCO.83213fef-5d66-4209-9c02-a35487de9e1e.png",
+            "price": "1100.00",
             "discount": "10.00",
-            "quantity": 17,
-            "category": 4
+            "quantity": 26,
+            "category": 7
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 49,
+        "fields": {
+            "name": "Xiaomi Redmi Watch 5 Lite",
+            "slug": "xiaomi-redmi-watch-5-lite",
+            "description": "Redmi Watch 5 Lite — это сбалансированные смарт-часы с ярким AMOLED-дисплеем, встроенным GPS и поддержкой звонков. Они подойдут тем, кто ищет функциональность и стиль по разумной цене.",
+            "image": "products_images/BCO.668370df-2b3c-4937-9168-4c1ab3f27dc0.png",
+            "price": "500.00",
+            "discount": "3.00",
+            "quantity": 12,
+            "category": 7
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 50,
+        "fields": {
+            "name": "Apple AirPods Pro 2",
+            "slug": "apple-airpods-pro-2",
+            "description": "AirPods Pro 2 — это сочетание комфорта, качества звука и интеллектуальных функций. Они подойдут как для музыки, так и для звонков, особенно в шумной среде.",
+            "image": "products_images/BCO.16d5d816-229b-4f09-a75c-cdabadb654cb.png",
+            "price": "800.00",
+            "discount": "3.00",
+            "quantity": 13,
+            "category": 9
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 51,
+        "fields": {
+            "name": "Samsung Galaxy Buds 3 Pro",
+            "slug": "samsung-galaxy-buds-3-pro",
+            "description": "Galaxy Buds 3 Pro — это не просто наушники, а технологичный аксессуар с киберпанковым стилем, мощным звуком и умной адаптацией к окружающей среде. Идеальны для тех, кто ценит качество, комфорт и футуризм.",
+            "image": "products_images/BCO.08d3f1c5-b510-4e49-bae0-39ab224e4fc7.png",
+            "price": "645.00",
+            "discount": "2.00",
+            "quantity": 34,
+            "category": 9
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 52,
+        "fields": {
+            "name": "Huawei FreeBuds Pro 4",
+            "slug": "huawei-freebuds-pro-4",
+            "description": "Huawei FreeBuds Pro 4 — это наушники для тех, кто ценит аудиофильское качество, комфорт и элегантный дизайн. Они подойдут как для прослушивания музыки, так и для звонков в шумной среде.",
+            "image": "products_images/BCO.f30146e0-b7b1-411d-9e5c-f6ed5ca47470.png",
+            "price": "425.00",
+            "discount": "0.00",
+            "quantity": 28,
+            "category": 9
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 53,
+        "fields": {
+            "name": "JBL Live Beam 3",
+            "slug": "jbl-live-beam-3",
+            "description": "Погрузитесь в мир чистого, объемного звучания с JBL Live Beam 3 — внутриканальными наушниками премиум-класса, созданными для тех, кто ценит качество, стиль и технологии. Благодаря 10-мм динамическим драйверам и поддержке LDAC, вы услышите музыку в высоком разрешении, с насыщенными басами и кристально чистыми высокими частотами.",
+            "image": "products_images/BCO.b9027ab6-15d4-4ec7-a37a-e9f67ab0278b.png",
+            "price": "700.00",
+            "discount": "1.00",
+            "quantity": 27,
+            "category": 9
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 54,
+        "fields": {
+            "name": "Bose QuietComfort Earbuds II",
+            "slug": "bose-quietcomfort-earbuds-ii",
+            "description": "Погрузитесь в идеальный звук с наушниками Bose QuietComfort Earbuds II — внутриканальной моделью, которая адаптируется к вашей анатомии и окружающей среде. Это не просто шумоподавление — это персонализированная тишина, созданная с помощью технологии CustomTune, которая сканирует форму вашего уха и настраивает звучание и ANC индивидуально.",
+            "image": "products_images/BCO.0be24b63-3d3b-43e0-8d5c-eea1c4759a08.png",
+            "price": "300.00",
+            "discount": "0.00",
+            "quantity": 10,
+            "category": 9
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 55,
+        "fields": {
+            "name": "MOONDROP Aria 2",
+            "slug": "moondrop-aria-2",
+            "description": "Aria 2 — это не просто продолжение, а переосмысление популярной модели Aria. MOONDROP провели глубокую работу над звуком, конструкцией и эргономикой, чтобы создать наушники, которые звучат как флагман, но стоят как середнячок.",
+            "image": "products_images/BCO.22684eca-aa81-4787-ab2b-24d8afc96dd1.png",
+            "price": "350.00",
+            "discount": "5.00",
+            "quantity": 13,
+            "category": 9
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 56,
+        "fields": {
+            "name": "Hidizs Mermaid MS2",
+            "slug": "hidizs-mermaid-ms2",
+            "description": "Hidizs MS2 — это внутриканальные наушники с гибридной конструкцией, созданные для тех, кто ценит детализированный звук и эстетичный дизайн. Они оснащены 10.2-мм динамическим драйвером с двойной катушкой и камерой, а также балансным арматурным драйвером Knowles RAD-33518, что обеспечивает широкий частотный диапазон и точную передачу звука.",
+            "image": "products_images/BCO.200f51d7-5feb-492d-85fe-4c24b5ae4de0.png",
+            "price": "555.00",
+            "discount": "10.00",
+            "quantity": 29,
+            "category": 9
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 57,
+        "fields": {
+            "name": "FiiO FD3 Pro",
+            "slug": "fiio-fd3-pro",
+            "description": "FD3 Pro — это улучшенная версия FD3, созданная для аудиофильмов, которые ценят не только качество звучания, но и инженерную эстетику. Корпус выполнен из магниево-алюминиевого сплава с декоративными вставками из стекла и полимера — выглядит дорого и современно.",
+            "image": "products_images/BCO.81d7625b-1996-4579-83c1-0e286c6f8f6f.png",
+            "price": "220.00",
+            "discount": "0.00",
+            "quantity": 20,
+            "category": 9
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 58,
+        "fields": {
+            "name": "Sennheiser IE 100 PRO",
+            "slug": "sennheiser-ie-100-pro",
+            "description": "IE 100 PRO — это мониторные наушники, разработанные для музыкантов, звукорежиссеров и тех, кто ценит точность звучания. Они обеспечивают стабильную АЧХ даже на высокой громкости, что делает их идеальными для живых выступлений и студийной работы.",
+            "image": "products_images/BCO.d73ba11e-13d5-4a1a-b7fa-d6f9b45313ba.png",
+            "price": "160.00",
+            "discount": "0.00",
+            "quantity": 49,
+            "category": 9
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 59,
+        "fields": {
+            "name": "Razer Moray",
+            "slug": "razer-moray",
+            "description": "Razer Moray — это гибридные внутриканальные мониторы, разработанные для тех, кто проводит часы за играми, стримами или монтажом. Они сочетают комфорт, высокую звуковую чёткость и профессиональную шумоизоляцию, чтобы вы могли сосредоточиться на контенте, не отвлекаясь на внешние шумы.",
+            "image": "products_images/BCO.8b4e9869-1a09-48e6-9356-7cf1e01ef00f.png",
+            "price": "330.00",
+            "discount": "5.00",
+            "quantity": 25,
+            "category": 9
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 60,
+        "fields": {
+            "name": "Baseus Mirror Lake PPS Digital Display Quick Charger (A+C EU)Baseus Mirror Lake PPS Digital Display Quick Charger (A+C EU)",
+            "slug": "baseus-mirror-lake-pps-digital-display-quick-charger-ac-eubaseus-mirror-lake-pps-digital-display-quick-charger-ac-eu",
+            "description": "Baseus Mirror Lake — это сетевое зарядное устройство с двумя портами (USB-A и USB-C), поддержкой множества протоколов быстрой зарядки и информативным цифровым дисплеем, который показывает текущие параметры зарядки: напряжение и силу тока.",
+            "image": "products_images/BCO.0412a21a-05e8-4a41-af89-408dd4fc64df.png",
+            "price": "80.00",
+            "discount": "0.00",
+            "quantity": 9,
+            "category": 8
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 61,
+        "fields": {
+            "name": "Xiaomi Mi Wireless Charging Stand (20W)",
+            "slug": "xiaomi-mi-wireless-charging-stand-20w",
+            "description": "Эта зарядка сочетает в себе эргономичный дизайн, двойную катушку и мощность до 20 Вт, позволяя заряжать смартфон как вертикально, так и горизонтально — удобно для просмотра видео, общения или работы во время зарядки.",
+            "image": "products_images/BCO.a632f6df-92da-407e-b7c9-25e1ae96b046.png",
+            "price": "50.00",
+            "discount": "2.50",
+            "quantity": 29,
+            "category": 8
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 62,
+        "fields": {
+            "name": "Skyway Race GT",
+            "slug": "skyway-race-gt",
+            "description": "Skyway Race GT — это автомобильная беспроводная зарядка с автоматической фиксацией смартфона, разработанная для комфортного использования в дороге. Благодаря инфракрасным датчикам и электрическому приводу, устройство автоматически раскрывает крепления при приближении телефона и надёжно фиксирует его в нужном положении.",
+            "image": "products_images/Без_названия.png",
+            "price": "90.00",
+            "discount": "1.50",
+            "quantity": 26,
+            "category": 8
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 63,
+        "fields": {
+            "name": "Spigen Liquid Air (TPU-накладка)",
+            "slug": "spigen-liquid-air-tpu-nakladka",
+            "description": "Spigen Liquid Air — это гибкий чехол-накладка, выполненный из термополиуретана (TPU), который сочетает ударопрочность, эргономику и минимализм. Он идеально повторяет форму смартфона, не утолщая его, и обеспечивает надёжную защиту от повседневных повреждений.",
+            "image": "products_images/BCO.d41ec0d1-a956-425a-bf8b-082a776a440a.png",
+            "price": "30.00",
+            "discount": "0.00",
+            "quantity": 60,
+            "category": 8
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 64,
+        "fields": {
+            "name": "Spigen Liquid Air",
+            "slug": "spigen-liquid-air",
+            "description": "Spigen Liquid Air — это гибкий чехол-накладка, выполненный из термополиуретана (TPU), который сочетает ударопрочность, эргономику и минимализм. Он идеально повторяет форму смартфона, не утолщая его, и обеспечивает надёжную защиту от повседневных повреждений.",
+            "image": "products_images/BCO_wUElMnf.d41ec0d1-a956-425a-bf8b-082a776a440a.png",
+            "price": "30.00",
+            "discount": "0.00",
+            "quantity": 60,
+            "category": 8
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 65,
+        "fields": {
+            "name": "UAG Plasma Series",
+            "slug": "uag-plasma-series",
+            "description": "Urban Armor Gear (UAG) Plasma Series — это rugged-чехол, сочетающий лёгкость, прочность и агрессивный дизайн. Он разработан для защиты устройства от падений, ударов и внешних воздействий, соответствуя военному стандарту MIL-STD-810G.",
+            "image": "products_images/BCO.67bfd2ef-fbd0-4b7e-a0aa-e2f4f4ea34b4.png",
+            "price": "100.00",
+            "discount": "2.00",
+            "quantity": 30,
+            "category": 8
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 66,
+        "fields": {
+            "name": "Nillkin Qin Series",
+            "slug": "nillkin-qin-series",
+            "description": "Qin Series от Nillkin — это премиальный чехол-книжка, выполненный из высококачественной искусственной кожи с мягкой подкладкой. Он обеспечивает 360° защиту смартфона, включая экран, камеру и боковые грани, при этом оставаясь тонким и лёгким.",
+            "image": "products_images/BCO.bc0c155d-aaaa-46fa-a3e0-38a84cc4bee5.png",
+            "price": "130.00",
+            "discount": "5.50",
+            "quantity": 23,
+            "category": 8
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 67,
+        "fields": {
+            "name": "2D стекло",
+            "slug": "2d-steklo",
+            "description": "2D стекло — это плоское защитное стекло без закруглений по краям. Оно закрывает только ровную часть экрана, не заходя на изогнутые участки. Это делает его совместимым с большинством чехлов и особенно удобным для телефонов с прямыми дисплеями.",
+            "image": "products_images/BCO.ee0ea335-6052-4ccb-96e5-d708894954d5.png",
+            "price": "70.00",
+            "discount": "0.00",
+            "quantity": 45,
+            "category": 8
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 68,
+        "fields": {
+            "name": "2.5D стекло",
+            "slug": "25d-steklo",
+            "description": "2.5D стекло — это закалённое защитное стекло с плавно скруглёнными краями, которое обеспечивает более комфортное использование и эстетичный внешний вид. В отличие от 2D, оно не просто плоское — его края обработаны так, чтобы мягко переходить в корпус смартфона, создавая ощущение цельности и объёмности.",
+            "image": "products_images/BCO.b87f70e5-be63-445f-bb46-c0a481931643.png",
+            "price": "80.00",
+            "discount": "0.00",
+            "quantity": 23,
+            "category": 8
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 69,
+        "fields": {
+            "name": "3D стекло",
+            "slug": "3d-steklo",
+            "description": "3D стекло — это защитное стекло, которое повторяет форму экрана смартфона, включая его закруглённые края. Оно обеспечивает полное прилегание и визуально сливается с дисплеем, создавая эффект цельного покрытия. Часто выпускается с цветной рамкой под корпус устройства.",
+            "image": "products_images/BCO.ee9783ff-8fb2-442c-beb8-468b862c5c92.png",
+            "price": "57.00",
+            "discount": "0.00",
+            "quantity": 22,
+            "category": 8
+        }
+    },
+    {
+        "model": "products.products",
+        "pk": 70,
+        "fields": {
+            "name": "Privacy Glass",
+            "slug": "privacy-glass",
+            "description": "Privacy Glass — это многослойное закалённое стекло с встроенным фильтром, который ограничивает угол обзора экрана. При наклоне устройства более чем на ~28° изображение становится тёмным или полностью невидимым для окружающих, сохраняя вашу личную информацию в безопасности.",
+            "image": "products_images/BCO.c8533c99-168d-427d-a504-487ae5e6114a.png",
+            "price": "150.00",
+            "discount": "10.00",
+            "quantity": 30,
+            "category": 8
         }
     }
 ]

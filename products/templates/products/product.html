@@ -26,9 +26,16 @@
                 <!-- Миниатюры -->
                 <div class="col-md-4">
                     {# Колонка шириной 4 из 12 на средних экранах и выше #}
-                    <img src="{{ product.image.url }}"
-                        class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1">
-                    {# Изображение товара с миниатюрой; клик открывает модальное окно #}
+                    {% if product.has_image %}
+                        {# Проверяем наличие изображения #}
+                        <img src="{{ product.image.url }}"
+                            class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1" alt="{{ product.name }}">
+                        {# Изображение товара с миниатюрой; клик открывает модальное окно #}
+                    {% else %}
+                        {# Fallback-изображение, если файла нет #}
+                        <img src="{% static 'deps/images/Not found image.png' %}"
+                            class="img-thumbnail" alt="Изображение товара отсутствует">
+                    {% endif %}
                 </div>
                 
                 <div class="col-md-4">
@@ -55,9 +62,16 @@
                             </div>
                             <div class="modal-body">
                                 {# Тело модального окна с изображением #}
-                                <img src="{{ product.image.url }}"
-                                    class="img-fluid" alt="Изображение 1">
-                                {# Полноразмерное изображение товара #}
+                                {% if product.has_image %}
+                                    {# Проверяем наличие изображения #}
+                                    <img src="{{ product.image.url }}"
+                                        class="img-fluid" alt="{{ product.name }}">
+                                    {# Полноразмерное изображение товара #}
+                                {% else %}
+                                    {# Fallback-изображение #}
+                                    <img src="{% static 'deps/images/Not found image.png' %}"
+                                        class="img-fluid" alt="Изображение товара отсутствует">
+                                {% endif %}
                             </div>
                         </div>
                     </div>

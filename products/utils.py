@@ -43,4 +43,5 @@ def q_search(query):
             stop_sel="</span>",
         )
     )
+    result = result.filter(image__isnull=False)  # Исключаем товары без изображений
     return result

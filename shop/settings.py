@@ -32,7 +32,7 @@ DEBUG = True
 
 # Список доменных имён или IP, с которых разрешены запросы к серверу
 # В режиме DEBUG можно оставить пустым, в продакшене указывать реальные хосты
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 # Стандартные встроенные приложения Django:
@@ -152,7 +152,7 @@ STATICFILES_DIRS = [
 ]
 
 # Папка, куда собираются все статические файлы при выполнении команды collectstatic (для продакшена)
-STATIC_ROOT = BASE_DIR / 'staticfiles'  
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  
 
 # Префикс URL для доступа к медиафайлам (загружаемым пользователями)
 MEDIA_URL = '/media/'  

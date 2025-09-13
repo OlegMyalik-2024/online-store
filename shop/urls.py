@@ -1,4 +1,4 @@
-from venv import logger
+import logging
 from django.contrib import admin
 from django.urls import include, path
 from debug_toolbar.toolbar import debug_toolbar_urls
@@ -6,6 +6,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import handler404
 from django.shortcuts import render
+
+logger = logging.getLogger(__name__)
 
 # Основной список маршрутов URL проекта
 urlpatterns = [
@@ -21,11 +23,6 @@ urlpatterns = [
      # Маршруты оформления заказов из приложения orders
     path('orders/', include('orders.urls', namespace='orders')),  
 ]
-
-# Временное обслуживание файлов для тестирования с DEBUG=False (НЕ ДЛЯ ПРОДАКШЕНА!)
-# В продакшене настройте nginx/apache для раздачи /static/ и /media/
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Дополнительные настройки URL для режима отладки (DEBUG=True)
 if settings.DEBUG:

@@ -175,7 +175,7 @@
                     </li>
                     {% for page in page_obj.paginator.page_range %}
                         {# Цикл по всем страницам пагинации #}
-                        {% if page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+                        {% if page >= page_obj.number|add:-1 and page <= page_obj.number|add:1 %}
                             {# Показываем только страницы в диапазоне ±2 от текущей #}
                             <li class="page-item {% if page_obj.number == page %} active {% endif %}">
                                 {# Активный класс для текущей страницы #}

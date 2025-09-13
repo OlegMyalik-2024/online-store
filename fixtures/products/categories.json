@@ -9,26 +9,42 @@
     },
     {
         "model": "products.categories",
-        "pk": 2,
+        "pk": 5,
         "fields": {
-            "name": "Apple",
-            "slug": "apple"
+            "name": "Смартфоны",
+            "slug": "smartfony"
         }
     },
     {
         "model": "products.categories",
-        "pk": 3,
+        "pk": 6,
         "fields": {
-            "name": "Samsung",
-            "slug": "samsung"
+            "name": "Планшеты",
+            "slug": "planshety"
         }
     },
     {
         "model": "products.categories",
-        "pk": 4,
+        "pk": 7,
         "fields": {
-            "name": "Xiaomi",
-            "slug": "xiaomi"
+            "name": "Умные часы и браслеты",
+            "slug": "umnye-chasy-i-braslety"
+        }
+    },
+    {
+        "model": "products.categories",
+        "pk": 8,
+        "fields": {
+            "name": "Аксессуары",
+            "slug": "aksessuary"
+        }
+    },
+    {
+        "model": "products.categories",
+        "pk": 9,
+        "fields": {
+            "name": "Наушники и гарнитуры",
+            "slug": "naushniki-i-garnitury"
         }
     }
 ]
