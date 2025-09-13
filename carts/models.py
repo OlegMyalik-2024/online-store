@@ -42,6 +42,19 @@ class Cart(models.Model):
         verbose_name_plural = "Корзина"
         # Порядок сортировки по умолчанию
         ordering = ("id",)
+        # Добавляем индексы для оптимизации запросов
+        indexes = [
+            # Составной индекс для фильтров по user + product
+            models.Index(fields=['user', 'product'], name='cart_user_product_idx'),
+            # Составной индекс для фильтров по session_key + product
+            models.Index(fields=['session_key', 'product'], name='cart_session_product_idx'),
+            # Отдельный индекс для фильтров только по user
+            models.Index(fields=['user'], name='cart_user_idx'),
+            # Отдельный индекс для фильтров только по session_key
+            models.Index(fields=['session_key'], name='cart_session_key_idx'),
+            # Индекс по product (FK) для select_related и фильтров по товару
+            models.Index(fields=['product'], name='cart_product_idx'),
+        ]
 
     # Использование кастомного менеджера на основе CartQueryset
     objects = CartQueryset().as_manager()

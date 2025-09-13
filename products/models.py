@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+from django.contrib.postgres.search import SearchVector
 
 
 # Модель категории товаров
@@ -23,6 +23,11 @@ class Categories(models.Model):
         db_table = 'category'  # Имя таблицы в БД
         verbose_name = 'Категорию'  # Название в админке (единственное число)
         verbose_name_plural = 'Категории'  # Название в админке (множественное число)
+        # Добавляем индексы для оптимизации запросов
+        indexes = [
+            # Индекс по slug для фильтров по category__slug (ускоряет CatalogView)
+            models.Index(fields=['slug'], name='categories_slug_idx'),
+        ]
 
     # Представление категории в интерфейсах
     def __str__(self):
@@ -90,6 +95,17 @@ class Products(models.Model):
         verbose_name = 'Продукт'  # Название в админке (единственное число)
         verbose_name_plural = 'Продукты'  # Название в админке (множественное число)
         ordering = ("id",)  # Сортировка по ID
+        # Добавляем индексы для оптимизации запросов
+        indexes = [
+            # Индекс по slug для быстрого поиска товара (ProductView)
+            models.Index(fields=['slug'], name='products_slug_idx'),
+            # Индекс по category (FK) для фильтров по категории (CatalogView)
+            models.Index(fields=['category'], name='products_category_idx'),
+            # Индекс по discount для фильтров товаров со скидкой
+            models.Index(fields=['discount'], name='products_discount_idx'),
+            # Индекс по price для сортировки по цене (если часто используется order_by="price")
+            models.Index(fields=['price'], name='products_price_idx'),
+        ]
 
     # Представление товара в интерфейсах
     def __str__(self):

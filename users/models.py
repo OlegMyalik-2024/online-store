@@ -18,6 +18,11 @@ class User(AbstractUser):
         verbose_name = 'Пользователя'
         # Отображение названия модели в админке во множественном числе
         verbose_name_plural = 'Пользователи'
+        # Добавляем индексы для оптимизации запросов
+        indexes = [
+            # Индекс по phone_number (если планируете фильтры/поиск по телефону, например, для уникальности)
+            models.Index(fields=['phone_number'], name='user_phone_number_idx'),
+        ]
         
     # Метод для строкового представления объекта модели (возвращает username)
     def __str__(self):

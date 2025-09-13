@@ -68,6 +68,15 @@ class Order(models.Model):
         verbose_name = "Заказ"  # Читаемое имя модели в единственном числе
         verbose_name_plural = "Заказы"  # Читаемое имя модели во множественном числе
         ordering = ("id",)  # Сортировка по умолчанию по возрастанию id
+        # Добавляем индексы для оптимизации запросов
+        indexes = [
+            # Индекс по user (FK) для фильтров заказов по пользователю
+            models.Index(fields=['user'], name='order_user_idx'),
+            # Индекс по status для фильтров по статусу заказа
+            models.Index(fields=['status'], name='order_status_idx'),
+            # Индекс по created_timestamp для сортировки и фильтрации по дате
+            models.Index(fields=['created_timestamp'], name='order_created_timestamp_idx'),
+        ]
 
     # Читаемое строковое представление объекта заказа.
     # Показывает номер заказа и имя пользователя.
@@ -117,6 +126,16 @@ class OrderItem(models.Model):
         verbose_name = "Проданный товар"  # Читаемое имя модели в единственном числе
         verbose_name_plural = "Проданные товары"  # Читаемое имя модели во множественном числе
         ordering = ("id",)  # Сортировка по умолчанию по возрастанию id
+        # Добавляем индексы для оптимизации запросов
+        indexes = [
+            # Индекс по order (FK) для фильтров товаров по заказу
+            models.Index(fields=['order'], name='orderitem_order_idx'),
+            # Индекс по product (FK) для фильтров товаров по продукту
+            models.Index(fields=['product'], name='orderitem_product_idx'),
+            # Составной индекс для комбинированных фильтров по order + product
+            models.Index(fields=['order', 'product'], name='orderitem_order_product_idx'),
+        ]
+        
     # Используем кастомный менеджер с дополнительными методами из OrderitemQueryset
     objects = OrderitemQueryset.as_manager()
  
@@ -125,7 +144,6 @@ class OrderItem(models.Model):
     # Округляет результат до 2 знаков после запятой.   
     def products_price(self):
         return round(self.product.sell_price() * self.quantity, 2)
-
 
     # Читаемое строковое представление объекта товара в заказе.
     # Показывает название товара и номер заказа.

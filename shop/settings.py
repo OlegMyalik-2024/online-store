@@ -144,7 +144,7 @@ USE_TZ = True  # Включить поддержку временных зон
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 # Префикс URL для доступа к статическим файлам (например, /static/css/style.css)
-STATIC_URL = 'static/'  
+STATIC_URL = '/static/'  
 
 # Папка с глобальными статическими файлами проекта (не собранными)
 STATICFILES_DIRS = [ 
