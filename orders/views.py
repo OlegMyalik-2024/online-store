@@ -33,6 +33,12 @@ class CreateOrderView(LoginRequiredMixin, FormView):
     # Проверяет наличие товаров в корзине и их количество на складе.
     # После успешного создания заказа очищает корзину.  
     def form_valid(self, form):
+        # Проверка пустой корзины
+        user = self.request.user
+        cart_items = Cart.objects.filter(user=user)
+        if not cart_items.exists():
+            messages.warning(self.request, 'Ваша корзина пуста')
+            return redirect('users:profile')
         try:
             with transaction.atomic():  # Гарантирует, что все операции будут выполнены как одна транзакция
                 user = self.request.user
@@ -96,3 +102,4 @@ class CreateOrderView(LoginRequiredMixin, FormView):
         context['title'] = 'Оформление заказа'
         context['order'] = True
         return context
+    

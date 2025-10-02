@@ -10,3 +10,4 @@ class OrdersConfig(AppConfig):
     name = 'orders'
     # Человекочитаемое имя приложения, отображается в админке
     verbose_name = 'Заказы'
+    

@@ -27,3 +27,4 @@ class User(AbstractUser):
     # Метод для строкового представления объекта модели (возвращает username)
     def __str__(self):
         return self.username
+    

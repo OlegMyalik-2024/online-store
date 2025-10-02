@@ -81,3 +81,4 @@ class CartRemoveView(CartMixin, View):
             'cart_items_html': self.render_cart(request) # Обновляем отображение корзины
         }
         return JsonResponse(response_data)
+    

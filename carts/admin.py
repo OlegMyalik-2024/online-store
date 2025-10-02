@@ -41,3 +41,4 @@ class CartAdmin(admin.ModelAdmin):
     # Установка описания для столбцов в админ-панели (для улучшения читаемости)
     user_display.short_description = "Пользователь"
     product_display.short_description = "Товар"
+    

@@ -1,3 +1,5 @@
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'shop.settings')
 from django.db import models
 from django.urls import reverse
 from django.contrib.postgres.search import SearchVector
@@ -130,3 +132,4 @@ class Products(models.Model):
     def has_image(self):
         # Возвращает True, если изображение загружено и файл существует
         return bool(self.image and self.image.name)
+    

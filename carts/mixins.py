@@ -46,3 +46,4 @@ class CartMixin:
         return render_to_string(
             "carts/includes/included_cart.html", context, request=request
         )
+        

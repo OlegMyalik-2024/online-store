@@ -71,3 +71,4 @@ class Cart(models.Model):
             
         # Для анонимного пользователя
         return f'Анонимная корзина | Товар {self.product.name} | Количество {self.quantity}'
+    

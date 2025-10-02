@@ -32,7 +32,7 @@ DEBUG = True
 
 # Список доменных имён или IP, с которых разрешены запросы к серверу
 # В режиме DEBUG можно оставить пустым, в продакшене указывать реальные хосты
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['testserver', 'localhost', '127.0.0.1']
 
 # Application definition
 # Стандартные встроенные приложения Django:
@@ -75,7 +75,7 @@ ROOT_URLCONF = 'shop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',  # Движок шаблонов Django
-        'DIRS': [BASE_DIR / 'templates'],  # Папка с пользовательскими шаблонами
+        'DIRS': [BASE_DIR / 'templates', BASE_DIR / 'main' / 'templates'],  # Папка с пользовательскими шаблонами
         'APP_DIRS': True,                  # Автоматический поиск шаблонов в папках приложений
         'OPTIONS': {
             'context_processors': [       # Контекстные процессоры — добавляют переменные в шаблоны
@@ -191,3 +191,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST_USER = 'your-email@gmail.com'
 # EMAIL_HOST_PASSWORD = 'your-password'
 # DEFAULT_FROM_EMAIL = 'your-email@gmail.com'
+
+# Настройки для тестирования
+# Используем SQLite в памяти для unit-тестов, чтобы избежать зависимости от PostgreSQL
+# и ускорить выполнение тестов
+import sys
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+    }
