@@ -75,7 +75,7 @@ ROOT_URLCONF = 'shop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',  # Движок шаблонов Django
-        'DIRS': [BASE_DIR / 'templates', BASE_DIR / 'main' / 'templates'],  # Папка с пользовательскими шаблонами
+        'DIRS': [BASE_DIR / 'templates'],  # Папка с пользовательскими шаблонами
         'APP_DIRS': True,                  # Автоматический поиск шаблонов в папках приложений
         'OPTIONS': {
             'context_processors': [       # Контекстные процессоры — добавляют переменные в шаблоны
@@ -137,7 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 LANGUAGE_CODE = 'ru'  # Язык по умолчанию — русский
-TIME_ZONE = 'UTC'  # Часовой пояс (UTC — всемирное координированное время)
+TIME_ZONE = 'Europe/Minsk'  # Часовой пояс для Беларуси (Europe/Minsk — Минск, автоматически учитывает переход на летнее/зимнее время)
 USE_I18N = True  # Включить поддержку интернационализации (переводы)
 USE_TZ = True  # Включить поддержку временных зон
 

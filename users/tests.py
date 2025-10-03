@@ -21,7 +21,7 @@ from users.views import (
     logout
 )
 from carts.models import Cart  # Предполагаем, что модель Cart существует
-from orders.models import Order  # Предполагаем, что модель Order существует (OrderItem не нужен для тестов)
+from orders.models import Order  # Предполагаем, что модель Order существует 
 
 User = get_user_model()
 

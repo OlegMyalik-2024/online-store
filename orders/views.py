@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin  
 from django.contrib import messages  
+from django.core.mail import send_mail
 from django.db import transaction  
 from django.forms import ValidationError  
 from django.shortcuts import redirect
@@ -7,7 +8,9 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView  
 from carts.models import Cart  
 from orders.forms import CreateOrderForm  
-from orders.models import Order, OrderItem  
+from orders.models import Order, OrderItem, OrderitemQueryset
+from users.models import User
+from django.conf import settings  
 
 
 
@@ -77,6 +80,34 @@ class CreateOrderView(LoginRequiredMixin, FormView):
                         product.save()
                     # Очищаем корзину пользователя после оформления заказа
                     cart_items.delete()
+                    
+                    
+                    # Отправка email-уведомления сотрудникам о новом заказе
+                    # Получаем список email всех сотрудников (включая текущего, если он сотрудник)
+                    staff_emails = list(User.objects.filter(is_staff=True).values_list('email', flat=True))
+                    
+                    # Формируем тему и тело письма
+                    subject = f"Новый заказ №{order.id} от {user.first_name} {user.last_name}"
+                    message = (
+                        f"Пользователь {user.first_name} {user.last_name} сделал новый заказ.\n"
+                        f"Номер заказа: {order.id}\n"
+                        f"Телефон: {order.phone_number}\n"
+                        f"Статус: {order.status}\n"
+                        f"Дата: {order.created_timestamp.strftime('%d.%m.%Y %H:%M')}\n"
+                        f"Адрес доставки: {order.delivery_address if order.requires_delivery else 'Самовывоз'}\n"
+                        # f"Сумма заказа: {OrderitemQueryset.get_total_cost()} руб.\n"  # Предполагаем, что у модели Order есть метод get_total_cost
+                    )
+                    
+                    if staff_emails:
+                        send_mail(
+                            subject,
+                            message,
+                            settings.DEFAULT_FROM_EMAIL,
+                            staff_emails,
+                            fail_silently=False,
+                        )
+                    
+                    
                     # Отправляем сообщение об успешном оформлении заказа
                     messages.success(self.request, 'Заказ оформлен!')
                     # Перенаправляем пользователя на страницу профиля
