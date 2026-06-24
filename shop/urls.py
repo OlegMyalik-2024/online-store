@@ -1,16 +1,19 @@
 import logging
+import os
 from django.contrib import admin
 from django.urls import include, path
-from debug_toolbar.toolbar import debug_toolbar_urls
+from debug_toolbar.toolbar import debug_toolbar_urls, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import handler404
 from django.shortcuts import render
+from django.views.static import serve # Импортируем serve
 
 logger = logging.getLogger(__name__)
 
 # Основной список маршрутов URL проекта
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('admin/', admin.site.urls),  # Путь к административной панели Django
     # Главная страница сайта и маршруты приложения main, namespace позволяет использовать имена URL с префиксом 'main'
     path('', include('main.urls', namespace='main')),  
@@ -31,6 +34,19 @@ if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  
     # Позволяет серверу разработки отдавать загружаемые медиа-файлы (картинки, документы)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  
+
+# Этот блок теперь ПРАВИЛЬНО работает при DEBUG = False на локальной машине
+if not settings.DEBUG:
+    urlpatterns += [
+        # 1. Раздача статики (исправлено на re_path и указана точная папка staticfiles из вашего лога)
+        re_path(r'^static/(?P<path>.*)$', serve, {
+            'document_root': os.path.join(settings.BASE_DIR, 'staticfiles')
+        }),
+        # 2. Раздача медиа-файлов (картинок товаров, которой не было)
+        re_path(r'^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT
+        }),
+    ]
 
 
 # Функция-обработчик для 404 ошибок (страница не найдена)
