@@ -1,5 +1,6 @@
 from django.contrib import admin
-from products.models import Categories, Products
+# Импортируем Categories, Products и вашу новую модель изображений ProductImages
+from products.models import Categories, Products, ProductImages
 
 
 # Регистрация модели Categories в админке
@@ -10,6 +11,13 @@ class CategoriesAdmin(admin.ModelAdmin):
     # Отображаемые поля в списке категорий
     list_display = ["name"]
 
+
+# Настройка встроенного блока (Inline) для загрузки дополнительных картинок товара
+class ProductImagesInline(admin.TabularInline):
+    model = ProductImages
+    extra = 3  # Количество пустых строк для загрузки фото по умолчанию
+    verbose_name = "Дополнительное изображение"
+    verbose_name_plural = "Дополнительная галерея изображений"
 
 
 # Регистрация модели Products в админке
@@ -25,13 +33,17 @@ class ProductsAdmin(admin.ModelAdmin):
     search_fields = ["name", "description"]
     # Фильтры в правой панели админки
     list_filter = ["discount", "quantity", "category"]
+    
     # Поля, отображаемые в форме редактирования товара
     fields = [
         "name",               # Название товара
         "category",           # Категория
         "slug",               # URL-идентификатор
         "description",        # Описание
-        "image",              # Изображение
+        "image",              # Главное изображение товара
         ("price", "discount"),# Цена и скидка — в одной строке
         "quantity",           # Количество на складе
     ]
+    
+    # Подключаем галерею картинок. Блок появится в самом низу формы редактирования товара
+    inlines = [ProductImagesInline]

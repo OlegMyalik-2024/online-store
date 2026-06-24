@@ -20,81 +20,111 @@
         <div class="card mb-4 custom-shadow">
             {# Карта Bootstrap с кастомной тенью для отображения информации о товаре #}
             
-            <div class="row">
+            <div class="row g-0">
                 {# Ряд Bootstrap для разделения на колонки #}
                 
-                <!-- Миниатюры -->
-                <div class="col-md-4">
-                    {# Колонка шириной 4 из 12 на средних экранах и выше #}
-                    {% if product.has_image %}
-                        {# Проверяем наличие изображения #}
-                        <img src="{{ product.image.url }}"
-                            class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1" alt="{{ product.name }}">
-                        {# Изображение товара с миниатюрой; клик открывает модальное окно #}
-                    {% else %}
-                        {# Fallback-изображение, если файла нет #}
-                        <img src="{% static 'deps/images/Not found image.png' %}"
-                            class="img-thumbnail" alt="Изображение товара отсутствует">
-                    {% endif %}
+                <!-- Блок Галереи Изображений -->
+                <div class="col-md-5 p-3">
+                    {# Колонка для главного фото и миниатюр #}
+                    <div class="main-image-container text-center mb-3">
+                        {% if product.has_image %}
+                            {# Главное превью-изображение товара; клик открывает его модалку #}
+                            <img src="{{ product.image.url }}"
+                                class="img-fluid rounded custom-shadow cursor-pointer" 
+                                style="max-height: 400px; object-fit: contain; cursor: pointer;"
+                                data-bs-toggle="modal" data-bs-target="#imageModalMain" alt="{{ product.name }}">
+                        {% else %}
+                            {# Fallback-изображение, если главного файла нет #}
+                            <img src="{% static 'deps/images/Not found image.png' %}"
+                                class="img-fluid rounded" alt="Изображение товара отсутствует">
+                        {% endif %}
+                    </div>
+
+                    <!-- Ряд дополнительных миниатюр из галереи -->
+                    <div class="row g-2 justify-content-center">
+                        {% for img_obj in product.images.all %}
+                            <div class="col-3 col-sm-2 col-md-3 text-center">
+                                <img src="{{ img_obj.image.url }}" 
+                                     class="img-thumbnail" 
+                                     style="height: 70px; width: 70px; object-fit: cover; cursor: pointer;"
+                                     data-bs-toggle="modal" 
+                                     data-bs-target="#imageModalAdditional{{ img_obj.id }}" 
+                                     alt="Ракурс {{ forloop.counter }}">
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
                 
-                <div class="col-md-4">
-                    {# Вторая колонка для дополнительной информации #}
-                    <p class="product_id mt-3">id: {{ product.display_id }}</p>
-                    {# Отображаем ID товара с отступом сверху #}
-                </div>
-                
-                <!-- Увеличить изображение в модальном окне -->
-                <div class="modal fade" id="imageModal1" tabindex="-1"
-                    aria-labelledby="imageModal1Label" aria-hidden="true">
-                    {# Модальное окно Bootstrap для увеличенного изображения #}
-                    <div class="modal-dialog modal-lg">
-                        {# Диалог модального окна большого размера #}
-                        <div class="modal-content">
-                            {# Содержимое модального окна #}
-                            <div class="modal-header">
-                                {# Заголовок модального окна #}
-                                <h5 class="modal-title" id="imageModal1Label">{{ product.name }}</h5>
-                                {# Название товара в заголовке #}
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Закрыть"></button>
-                                {# Кнопка закрытия модального окна #}
-                            </div>
-                            <div class="modal-body">
-                                {# Тело модального окна с изображением #}
-                                {% if product.has_image %}
-                                    {# Проверяем наличие изображения #}
-                                    <img src="{{ product.image.url }}"
-                                        class="img-fluid" alt="{{ product.name }}">
-                                    {# Полноразмерное изображение товара #}
-                                {% else %}
-                                    {# Fallback-изображение #}
-                                    <img src="{% static 'deps/images/Not found image.png' %}"
-                                        class="img-fluid" alt="Изображение товара отсутствует">
-                                {% endif %}
-                            </div>
+                <!-- Блок краткой служебной информации -->
+                <div class="col-md-7 p-3">
+                    {# Правая колонка для ID и основных действий #}
+                    <div class="d-flex flex-column h-100 justify-content-between">
+                        <div>
+                            <p class="product_id text-muted mb-1">id: {{ product.display_id }}</p>
+                            <h2 class="card-title fw-bold">{{ product.name }}</h2>
+                        </div>
+                        
+                        <!-- Блок цены и кнопки внутри разметки карточки -->
+                        <div class="my-4">
+                            <p class="card-text fs-4">Цена: <strong class="text-dark">{{ product.sell_price }} BYN</strong></p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- МОДАЛЬНЫЕ ОКНА ДЛЯ УВЕЛИЧЕНИЯ (Генерируются вне сетки карточки) -->
             
-            <!-- Описание товара -->
-            <div class="card-body">
-                {# Тело карты для описания товара #}
-                <p class="card-text">Цена: <strong>{{ product.sell_price }} BYN</strong></p>
-                {# Отображаем цену товара в белорусских рублях #}
-                <h5 class="card-title">{{ product.name }}</h5>
-                {# Название товара в заголовке карты #}
-                <p class="card-text">{{ product.description }}</p>
+            <!-- 1. Модалка для главного изображения -->
+            {% if product.has_image %}
+            <div class="modal fade" id="imageModalMain" tabindex="-1" aria-labelledby="imageModalMainLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imageModalMainLabel">{{ product.name }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.name }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- 2. Динамические модалки для каждого дополнительного фото из галереи -->
+            {% for img_obj in product.images.all %}
+            <div class="modal fade" id="imageModalAdditional{{ img_obj.id }}" tabindex="-1" aria-labelledby="imageModalAddLabel{{ img_obj.id }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imageModalAddLabel{{ img_obj.id }}">{{ product.name }} — Ракурс {{ forloop.counter }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img src="{{ img_obj.image.url }}" class="img-fluid rounded" alt="Ракурс {{ forloop.counter }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+            <!-- Описание товара внизу карты -->
+            <div class="card-body border-top">
+                {# Тело карты для подробного описания товара #}
+                <h5 class="fw-bold mb-3">Описание товара</h5>
+                <p class="card-text text-secondary" style="line-height: 1.6;">{{ product.description }}</p>
                 {# Описание товара #}
-                <a href="{% url "cart:cart_add" %}" class="btn btn-dark add-to-cart"
-                    data-product-id={{ product.id }}>
-                    {# Ссылка на URL добавления в корзину с данными товара #}
-                    {% csrf_token %}
-                    {# Токен CSRF для защиты от подделки запросов #}
-                    Добавить в корзину
-                    {# Текст кнопки #}
-                </a>
+                
+                <div class="mt-4">
+                    <a href="{% url "cart:cart_add" %}" class="btn btn-dark btn-lg add-to-cart"
+                        data-product-id="{{ product.id }}">
+                        {# Ссылка на URL добавления в корзину с данными товара #}
+                        {% csrf_token %}
+                        {# Токен CSRF для защиты от подделки запросов #}
+                        Добавить в корзину
+                        {# Текст кнопки #}
+                    </a>
+                </div>
             </div>
         </div>
     </div>

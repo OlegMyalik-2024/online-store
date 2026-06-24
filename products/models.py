@@ -133,3 +133,26 @@ class Products(models.Model):
         # Возвращает True, если изображение загружено и файл существует
         return bool(self.image and self.image.name)
     
+    # Новая модель для галереи дополнительных изображений товара
+class ProductImages(models.Model):
+    # Связь с основным товаром. При удалении товара удалятся и его фото (CASCADE)
+    # related_name='images' позволит легко получать все фото товара через product.images.all()
+    product = models.ForeignKey(
+        to=Products,
+        on_delete=models.CASCADE,
+        related_name='images',
+        verbose_name='Товар'
+    )
+    # Поле для загрузки дополнительного изображения
+    image = models.ImageField(
+        upload_to='products_images',
+        verbose_name='Изображение'
+    )
+
+    class Meta:
+        db_table = 'product_images'  # Имя таблицы в БД
+        verbose_name = 'Дополнительное изображение'
+        verbose_name_plural = 'Дополнительные изображения'
+
+    def __str__(self):
+        return f"Доп. фото для товара: {self.product.name}"
