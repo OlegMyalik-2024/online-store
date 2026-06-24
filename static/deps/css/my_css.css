@@ -78,3 +78,23 @@ body {
     -2px  2px 0 black,  /* Левый нижний угол */
      2px  2px 0 black;  /* Правый нижний угол */
 }
+
+/* Сделать тело страницы flex-контейнером */
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* Основной контейнер на всю высоту между хедером и футером */
+section {
+  flex: 1 0 auto;
+}
+/* Футер прижат к низу */
+footer {
+  flex-shrink: 0;
+  background-color: #222; /* Пример фона футера */
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+}
