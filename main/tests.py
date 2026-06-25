@@ -5,7 +5,7 @@ from django.conf import settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'shop.settings')
 django.setup()
 
-from django.test import TestCase, Client
+from django.test import TestCase, Client, override_settings
 from django.urls import reverse, resolve
 from main.views import IndexView, AboutView, ContactsView, Delivery_and_paymentView
 
@@ -106,7 +106,8 @@ class MainUrlsTestCase(TestCase):
 
 
 
-# Интеграционные тесты для проверки HTTP-ответов 
+# Интеграционные тесты для проверки HTTP-ответов
+@override_settings(CACHES={'default': {'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}}) 
 class MainIntegrationTestCase(TestCase):
 
     # Подготовка данных
