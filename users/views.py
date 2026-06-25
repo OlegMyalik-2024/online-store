@@ -163,6 +163,8 @@ class UserPasswordResetView(PasswordResetView):
     email_template_name = 'users/password_reset/password_reset_email.html'  # Шаблон email для сброса
     success_url = reverse_lazy('users:password_reset_done')  # URL после отправки письма
     subject_template_name = 'users/password_reset/password_reset_subject.txt'  # Тема письма
+    # ВАЖНО: Добавляем эту строку, чтобы Django отправлял HTML-версию письма с поддержкой тегов <strong>
+    html_email_template_name = 'users/password_reset/password_reset_email.html'
 
     # Добавляем заголовок страницы в контекст шаблона
     def get_context_data(self, **kwargs):

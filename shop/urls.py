@@ -13,7 +13,6 @@ logger = logging.getLogger(__name__)
 
 # Основной список маршрутов URL проекта
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('admin/', admin.site.urls),  # Путь к административной панели Django
     # Главная страница сайта и маршруты приложения main, namespace позволяет использовать имена URL с префиксом 'main'
     path('', include('main.urls', namespace='main')),  

@@ -12,10 +12,15 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # Корневая директория проекта, используется для построения путей к файлам и папкам
 BASE_DIR = Path(__file__).resolve().parent.parent
+dotenv_path = os.path.join(BASE_DIR, '.env')
+
+# Сначала строго загружаем переменные!
+load_dotenv(dotenv_path=dotenv_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -23,12 +28,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # Секретный ключ проекта, используемый для криптографических операций (подписи cookies, токенов и т.п.)
 # В продакшене его нужно хранить в секрете и не выкладывать в публичный доступ
-SECRET_KEY = 'django-insecure-j45gvtheyc)(ds3!hfbz6n!!9dc4qm^fg*p3+7og&^uszk)uhs'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Включение режима отладки — показывает подробные ошибки и логи
 # В продакшене всегда ставить False
-DEBUG = True
+DEBUG = False
 
 # Список доменных имён или IP, с которых разрешены запросы к серверу
 # В режиме DEBUG можно оставить пустым, в продакшене указывать реальные хосты
@@ -93,12 +98,13 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 # База данных
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',  # Используем PostgreSQL как базу данных
         'NAME': 'HelloMobile',                      # Имя базы данных
         'USER': 'postgres',                      # Пользователь базы данных
-        'PASSWORD': 'Hgggght97107',                 # Пароль пользователя
+        'PASSWORD': os.getenv('DB_PASSWORD'),                 # Пароль пользователя
         'HOST': 'localhost',                        # Хост базы данных (локальный сервер)
         'PORT': '5432',                            # Порт базы данных PostgreSQL
     }
@@ -182,15 +188,18 @@ LOGIN_REDIRECT_URL = '/'
 
 # Настройка отправки почты
 # В режиме разработки письма выводятся в консоль (не отправляются реально)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Настройки для реальной отправки почты (SMTP) — раскомментировать и заполнить для продакшена
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'  # SMTP сервер (пример — Gmail)
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'your-email@gmail.com'
-# EMAIL_HOST_PASSWORD = 'your-password'
-# DEFAULT_FROM_EMAIL = 'your-email@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # SMTP сервер 
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'malikoleg1.23@gmail.com'
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN=EMAIL_HOST_USER
 
 # Настройки для тестирования
 # Используем SQLite в памяти для unit-тестов, чтобы избежать зависимости от PostgreSQL
